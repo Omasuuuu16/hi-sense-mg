@@ -1,4 +1,4 @@
-import Redis from 'ioredis';
+import { createClient, type RedisClientType } from 'redis';
 import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcryptjs';
@@ -6,16 +6,27 @@ import bcrypt from 'bcryptjs';
 const PRODUCTS_KEY = 'hisense:products';
 const USERS_KEY = 'hisense:users';
 
-let redis: Redis | null = null;
+let redis: RedisClientType | null = null;
+let connecting: Promise<RedisClientType> | null = null;
 let initialized = false;
 
-function getRedis(): Redis {
-    if (!redis) {
-        const url = process.env.REDIS_URL;
-        if (!url) throw new Error('REDIS_URL is not configured');
-        redis = new Redis(url, { maxRetriesPerRequest: 3 });
+async function getRedis(): Promise<RedisClientType> {
+    if (redis?.isOpen) return redis;
+
+    if (!connecting) {
+        connecting = (async () => {
+            const url = process.env.REDIS_URL;
+            if (!url) throw new Error('REDIS_URL is not configured');
+
+            const client = createClient({ url });
+            client.on('error', (err) => console.error('Redis error:', err));
+            await client.connect();
+            redis = client as RedisClientType;
+            return redis;
+        })();
     }
-    return redis;
+
+    return connecting;
 }
 
 export interface StoreUser {
@@ -42,7 +53,7 @@ export interface StoreProduct {
 
 async function ensureInitialized() {
     if (initialized) return;
-    const client = getRedis();
+    const client = await getRedis();
 
     const users = await client.get(USERS_KEY);
     if (!users) {
@@ -75,22 +86,22 @@ async function ensureInitialized() {
 
 async function getUsers(): Promise<StoreUser[]> {
     await ensureInitialized();
-    const raw = await getRedis().get(USERS_KEY);
+    const raw = await (await getRedis()).get(USERS_KEY);
     return raw ? JSON.parse(raw) : [];
 }
 
 async function saveUsers(users: StoreUser[]) {
-    await getRedis().set(USERS_KEY, JSON.stringify(users));
+    await (await getRedis()).set(USERS_KEY, JSON.stringify(users));
 }
 
 async function getAllProductsRaw(): Promise<StoreProduct[]> {
     await ensureInitialized();
-    const raw = await getRedis().get(PRODUCTS_KEY);
+    const raw = await (await getRedis()).get(PRODUCTS_KEY);
     return raw ? JSON.parse(raw) : [];
 }
 
 async function saveProducts(products: StoreProduct[]) {
-    await getRedis().set(PRODUCTS_KEY, JSON.stringify(products));
+    await (await getRedis()).set(PRODUCTS_KEY, JSON.stringify(products));
 }
 
 function normalizeProduct(p: StoreProduct): StoreProduct {
