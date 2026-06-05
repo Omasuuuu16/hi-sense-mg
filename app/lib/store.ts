@@ -7,6 +7,7 @@ import {
     redisDeleteProduct,
     redisDeleteAllProducts,
     redisBulkInsertProducts,
+    redisReplaceProductsByCategories,
     redisGetUserByEmail,
     redisEmailExists,
     redisInsertUser,
@@ -90,6 +91,24 @@ export async function deleteAllProducts() {
 
 export async function bulkInsertProducts(items: StoreProduct[]) {
     if (useRedisStore()) return redisBulkInsertProducts(items);
+
+    for (const prod of items) {
+        await dbQuery(
+            'INSERT INTO products (id, category, brand, model, specs, price, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            [prod.id, prod.category, prod.brand, prod.model, prod.specs, prod.price, prod.section ?? null, prod.image ?? null]
+        );
+    }
+}
+
+/** Replace products only in the given categories; other categories are left untouched. */
+export async function replaceProductsByCategories(categories: string[], items: StoreProduct[]) {
+    if (useRedisStore()) return redisReplaceProductsByCategories(categories, items);
+
+    const normalized = categories.map(c => c.toLowerCase());
+    if (normalized.length > 0) {
+        const placeholders = normalized.map(() => '?').join(', ');
+        await dbQuery(`DELETE FROM products WHERE LOWER(category) IN (${placeholders})`, normalized);
+    }
 
     for (const prod of items) {
         await dbQuery(

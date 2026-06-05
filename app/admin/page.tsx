@@ -70,7 +70,7 @@ export default function AdminPage() {
             const data = await res.json();
             if (res.ok && data.success) {
                 setResultSummary(data.summary);
-                showToast('Catalog replaced successfully!', 'success');
+                showToast('Catalog updated successfully!', 'success');
                 setFile(null);
                 fetchStats();
             } else {
@@ -173,15 +173,15 @@ export default function AdminPage() {
                                 <FileSpreadsheet className="w-5 h-5 text-blue-600" />
                             </div>
                             <div>
-                                <h2 className="text-lg font-black text-slate-800">Replace Catalog via Excel</h2>
-                                <p className="text-xs text-slate-400">All existing products will be deleted and replaced</p>
+                                <h2 className="text-lg font-black text-slate-800">Update Catalog via Excel</h2>
+                                <p className="text-xs text-slate-400">Only the categories in your file will be replaced</p>
                             </div>
                         </div>
 
                         {/* Warning */}
                         <div className="mb-5 p-3 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-3 text-amber-700 text-xs font-medium">
                             <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                            <span>Uploading will <strong>delete all current products</strong> and replace them with the Excel data. This cannot be undone.</span>
+                            <span>Uploading a <strong>laptop-only</strong> file replaces laptops only. A <strong>PC-only</strong> file replaces PC parts only. Files with both sheets update each category separately. Other categories stay unchanged.</span>
                         </div>
 
                         <form onSubmit={handleUpload} className="space-y-4">
@@ -244,7 +244,7 @@ export default function AdminPage() {
                                 {uploading ? (
                                     <><span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Processing...</>
                                 ) : (
-                                    <><Upload className="w-4 h-4" /> Replace Catalog</>
+                                    <><Upload className="w-4 h-4" /> Update Catalog</>
                                 )}
                             </button>
                         </form>
@@ -278,7 +278,12 @@ export default function AdminPage() {
                                     <CheckCircle2 className="w-6 h-6 text-green-600 flex-shrink-0" />
                                     <div>
                                         <p className="text-sm font-bold text-green-700">Import Successful</p>
-                                        <p className="text-xs text-green-600">{resultSummary.totalAdded} products added</p>
+                                        <p className="text-xs text-green-600">
+                                            {resultSummary.totalAdded} products added
+                                            {resultSummary.categoriesReplaced?.length
+                                                ? ` · ${resultSummary.categoriesReplaced.join(' & ')} updated`
+                                                : ''}
+                                        </p>
                                     </div>
                                 </div>
 

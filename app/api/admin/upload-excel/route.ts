@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUser } from '@/app/lib/auth';
-import { deleteAllProducts, bulkInsertProducts } from '@/app/lib/store';
+import { replaceProductsByCategories } from '@/app/lib/store';
 import * as XLSX from 'xlsx';
 import crypto from 'crypto';
 
@@ -224,9 +224,16 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        await deleteAllProducts();
-        await bulkInsertProducts(newProducts);
-        console.log(`Imported ${newProducts.length} products.`);
+        const categoriesToReplace: string[] = [];
+        if (laptopsAdded > 0) categoriesToReplace.push('Laptop');
+        if (pcsAdded > 0) categoriesToReplace.push('PC');
+
+        if (categoriesToReplace.length === 0) {
+            return NextResponse.json({ error: 'No valid products found in Excel file.' }, { status: 400 });
+        }
+
+        await replaceProductsByCategories(categoriesToReplace, newProducts);
+        console.log(`Imported ${newProducts.length} products for categories: ${categoriesToReplace.join(', ')}.`);
 
         return NextResponse.json({
             success: true,
@@ -234,6 +241,7 @@ export async function POST(req: NextRequest) {
                 laptopsAdded,
                 pcsAdded,
                 totalAdded: laptopsAdded + pcsAdded,
+                categoriesReplaced: categoriesToReplace,
             },
         });
     } catch (error) {

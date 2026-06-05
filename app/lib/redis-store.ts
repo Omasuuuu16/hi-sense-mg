@@ -149,6 +149,17 @@ export async function redisBulkInsertProducts(items: StoreProduct[]) {
     await saveProducts(items.map(p => ({ ...p, created_at: new Date().toISOString() })));
 }
 
+export async function redisReplaceProductsByCategories(categories: string[], items: StoreProduct[]) {
+    const normalized = new Set(categories.map(c => c.toLowerCase()));
+    const existing = await getAllProductsRaw();
+    const kept = existing.filter(p => !normalized.has(p.category.toLowerCase()));
+    const merged = [
+        ...kept,
+        ...items.map(p => ({ ...p, created_at: p.created_at ?? new Date().toISOString() })),
+    ];
+    await saveProducts(merged);
+}
+
 export async function redisGetUserByEmail(email: string): Promise<StoreUser | undefined> {
     const users = await getUsers();
     return users.find(u => u.email.toLowerCase() === email.toLowerCase());

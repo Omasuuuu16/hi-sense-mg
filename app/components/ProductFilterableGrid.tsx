@@ -125,7 +125,7 @@ export default function ProductFilterableGrid({ title }: { title: string }) {
                             placeholder={t('searchPlaceholder')}
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
-                            className="w-full px-4 py-2 rounded-full border border-gray-200 dark:border-white/10 bg-white/50 dark:bg-black/50 focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
+                            className="w-full px-4 py-2 rounded-full border border-gray-200 bg-white text-slate-800 placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                         />
                     </div>
                 </div>
