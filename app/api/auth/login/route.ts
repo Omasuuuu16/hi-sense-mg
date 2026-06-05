@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { dbQuery } from '@/app/lib/db';
+import { getUserByEmail } from '@/app/lib/store';
 import { comparePassword, signToken, getCookieConfig } from '@/app/lib/auth';
 
 export async function POST(req: NextRequest) {
@@ -23,18 +23,14 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'Validation failed', details: errors }, { status: 400 });
         }
 
-        // Find user
-        const users = await dbQuery('SELECT * FROM users WHERE email = ?', [trimmedEmail]);
-        if (!users || users.length === 0) {
+        const user = await getUserByEmail(trimmedEmail);
+        if (!user) {
             return NextResponse.json({ 
                 error: 'Validation failed', 
                 details: { email: 'Email address not found' } 
             }, { status: 400 });
         }
 
-        const user = users[0];
-
-        // Compare password
         const passwordMatch = await comparePassword(trimmedPassword, user.password);
         if (!passwordMatch) {
             return NextResponse.json({ 
@@ -43,7 +39,6 @@ export async function POST(req: NextRequest) {
             }, { status: 400 });
         }
 
-        // Create JWT payload
         const payload = {
             id: user.id,
             username: user.username,
@@ -52,7 +47,6 @@ export async function POST(req: NextRequest) {
             phone: user.phone
         };
 
-        // Sign JWT and set HTTP-only cookie
         const token = signToken(payload);
         const cookieConfig = getCookieConfig(token);
 
@@ -67,7 +61,6 @@ export async function POST(req: NextRequest) {
             }
         });
 
-        // Set session cookie
         response.cookies.set(cookieConfig);
 
         return response;

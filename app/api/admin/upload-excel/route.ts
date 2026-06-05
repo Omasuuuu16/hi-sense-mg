@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUser } from '@/app/lib/auth';
-import { dbQuery } from '@/app/lib/db';
+import { deleteAllProducts, bulkInsertProducts } from '@/app/lib/store';
 import * as XLSX from 'xlsx';
 import crypto from 'crypto';
 
@@ -115,9 +115,7 @@ export async function POST(req: NextRequest) {
         const buffer = Buffer.from(arrayBuffer);
         const workbook = XLSX.read(buffer, { type: 'buffer' });
 
-        // 3. ✅ DELETE ALL EXISTING PRODUCTS FIRST
-        await dbQuery('DELETE FROM products');
-        console.log('All existing products cleared for fresh import.');
+        const newProducts: { id: string; category: string; brand: string; model: string; specs: string; price: number; section?: string; image?: string }[] = [];
 
         let laptopsAdded = 0;
         let pcsAdded = 0;
@@ -175,10 +173,16 @@ export async function POST(req: NextRequest) {
                         const image = pickLaptopImage(brand, modelName, laptopsAdded);
                         const newId = crypto.randomUUID();
 
-                        await dbQuery(
-                            'INSERT INTO products (id, category, brand, model, specs, price, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-                            [newId, 'Laptop', brand, modelName, specs, priceVal, currentSection, image]
-                        );
+                        newProducts.push({
+                            id: newId,
+                            category: 'Laptop',
+                            brand,
+                            model: modelName,
+                            specs,
+                            price: priceVal,
+                            section: currentSection,
+                            image,
+                        });
                         laptopsAdded++;
                     }
                 }
@@ -206,14 +210,23 @@ export async function POST(req: NextRequest) {
                     const image = pickPcImage(itemName, pcsAdded);
                     const newId = crypto.randomUUID();
 
-                    await dbQuery(
-                        'INSERT INTO products (id, category, brand, model, specs, price, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                        [newId, 'PC', 'Generic', itemName, itemName, priceVal, image]
-                    );
+                    newProducts.push({
+                        id: newId,
+                        category: 'PC',
+                        brand: 'Generic',
+                        model: itemName,
+                        specs: itemName,
+                        price: priceVal,
+                        image,
+                    });
                     pcsAdded++;
                 }
             }
         }
+
+        await deleteAllProducts();
+        await bulkInsertProducts(newProducts);
+        console.log(`Imported ${newProducts.length} products.`);
 
         return NextResponse.json({
             success: true,

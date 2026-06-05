@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { dbQuery } from '@/app/lib/db';
+import { emailExists, insertUser } from '@/app/lib/store';
 import { hashPassword } from '@/app/lib/auth';
 
 export async function POST(req: NextRequest) {
@@ -9,7 +9,6 @@ export async function POST(req: NextRequest) {
 
         const errors: Record<string, string> = {};
 
-        // Validation
         const trimmedUsername = (username || '').trim();
         if (!trimmedUsername) {
             errors.username = 'Username is required';
@@ -40,26 +39,25 @@ export async function POST(req: NextRequest) {
             errors.password = 'Password must be at least 6 characters';
         }
 
-        // Return validation errors if any
         if (Object.keys(errors).length > 0) {
             return NextResponse.json({ error: 'Validation failed', details: errors }, { status: 400 });
         }
 
-        // Check if email already exists
-        const existingUsers = await dbQuery('SELECT id FROM users WHERE email = ?', [trimmedEmail]);
-        if (existingUsers && existingUsers.length > 0) {
+        if (await emailExists(trimmedEmail)) {
             return NextResponse.json({ 
                 error: 'Validation failed', 
                 details: { email: 'Email already exists' } 
             }, { status: 400 });
         }
 
-        // Hash password and insert user
         const hashedPasswordStr = await hashPassword(trimmedPassword);
-        await dbQuery(
-            'INSERT INTO users (username, email, password, phone, role) VALUES (?, ?, ?, ?, ?)',
-            [trimmedUsername, trimmedEmail, hashedPasswordStr, trimmedPhone, 'User']
-        );
+        await insertUser({
+            username: trimmedUsername,
+            email: trimmedEmail,
+            password: hashedPasswordStr,
+            phone: trimmedPhone,
+            role: 'User',
+        });
 
         return NextResponse.json({ success: true, message: 'User registered successfully!' }, { status: 201 });
     } catch (error) {
