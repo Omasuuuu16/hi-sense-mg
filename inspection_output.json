@@ -1,0 +1,40 @@
+[
+  {
+    "fileName": "New Laptop هاى سينس.xlsx",
+    "sheetName": "USED LAPTOPS",
+    "headers": [
+      "",
+      "LAP TOP USED - هاى سينس",
+      "",
+      ""
+    ],
+    "firstRow": [
+      "",
+      "                    Hp Probook & EliteBook  Laptop ",
+      "",
+      ""
+    ],
+    "secondRow": [
+      "HP Z Book G6",
+      "HP Z Book G6-Ci7-9thH-Ram16gb-SSD512gb-15.6\"FHD,VGA4GB Nvidia T2000 ",
+      23500,
+      1
+    ]
+  },
+  {
+    "fileName": "PC & Led هاى سينس.xlsx",
+    "sheetName": "7-2-2026",
+    "headers": [
+      "الصنف",
+      "سعر البيع "
+    ],
+    "firstRow": [
+      "ram 8GB Crucial PC Used DDR4 2400",
+      1850
+    ],
+    "secondRow": [
+      "ram 8GB Crucial PC Used DDR4 3200",
+      2000
+    ]
+  }
+]

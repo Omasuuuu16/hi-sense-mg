@@ -1,0 +1,1159 @@
+[
+  {
+    "id": "03583e9c-ba53-46db-acf9-e207439a1f40",
+    "category": "Laptop",
+    "brand": "HP",
+    "model": "HP Z Book G6",
+    "specs": "HP Z Book G6-Ci7-9thH-Ram16gb-SSD512gb-15.6\"FHD,VGA4GB Nvidia T2000",
+    "price": 23500,
+    "section": "Hp Probook & EliteBook Laptop",
+    "image": "/images/laptops/HP Z Book G6.jpg"
+  },
+  {
+    "id": "870365a4-2c80-44c1-a4a6-efdb309d3afa",
+    "category": "Laptop",
+    "brand": "HP",
+    "model": "HP Z Book Studio G7",
+    "specs": "HP Z Book Studio G7-Ci7-10thH-Ram32gb-SSD512gb-15.6\"FHD,VGA4GB Nvidia T1000",
+    "price": 27500,
+    "section": "Hp Probook & EliteBook Laptop",
+    "image": "/images/laptops/HP Z Book Studio G7.jpg"
+  },
+  {
+    "id": "b9c76eae-5f93-4ea0-a50d-c863aa3a24e2",
+    "category": "Laptop",
+    "brand": "HP",
+    "model": "HP Pro Book 440 G1",
+    "specs": "HP ProBook440G1-Ci3-8th-Ram8gb-SSD256gb-14\"FHD Touch X360",
+    "price": 9000,
+    "section": "Hp Probook & EliteBook Laptop",
+    "image": "/images/laptops/HP Pro Book 440 G1.jpg"
+  },
+  {
+    "id": "91af3ab7-f3bb-44ef-b8eb-5948ca695963",
+    "category": "Laptop",
+    "brand": "HP",
+    "model": "HP Pro Book 640 G5",
+    "specs": "HP ProBook640G5-Ci5-8th-Ram8gb-SSD256gb-14\"FHD",
+    "price": 9900,
+    "section": "Hp Probook & EliteBook Laptop",
+    "image": "/images/laptops/HP Pro Book 640 G5.jpg"
+  },
+  {
+    "id": "a20ba171-d5a7-48d7-804e-a4a5e5bfc437",
+    "category": "Laptop",
+    "brand": "HP",
+    "model": "HP AMD Ryzen",
+    "specs": "HP 755 G7 - Ryzen7-10th - Ram 16gb - SSD 256gb - VGA 2GB - 15.6\"",
+    "price": 15000,
+    "section": "Hp AMD Laptop",
+    "image": "/images/laptops/HP AMD Ryzen.jpg"
+  },
+  {
+    "id": "53c51dd3-727a-49ca-ac31-65ce57aca6e1",
+    "category": "Laptop",
+    "brand": "HP",
+    "model": "HP AMD Ryzen",
+    "specs": "HP 845 G8 - Ryzen5-11th - Ram 8gb - SSD 256gb - VGA 2GB - 14\"",
+    "price": 13500,
+    "section": "Hp AMD Laptop",
+    "image": "/images/laptops/HP AMD Ryzen.jpg"
+  },
+  {
+    "id": "91f800e3-04a8-4181-be2c-07f72cba4022",
+    "category": "Laptop",
+    "brand": "HP",
+    "model": "HP AMD Ryzen",
+    "specs": "HP 745 G5 - Ryzen5-8th - Ram 8gb - SSD 256gb - VGA 1GB - 14\"",
+    "price": 9700,
+    "section": "Hp AMD Laptop",
+    "image": "/images/laptops/HP AMD Ryzen.jpg"
+  },
+  {
+    "id": "f78889c4-834d-42fa-873f-b079f843d526",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5591",
+    "specs": "Dell Latitude 5591-Ci5-8th H-Ram8gb-SSD256gb-15.6 \"FHD",
+    "price": 13000,
+    "section": "Dell Latitude & Precision Laptop",
+    "image": "/images/laptops/Dell Latitude 5591.webp"
+  },
+  {
+    "id": "ee4d329f-440b-47a1-b2ba-981b1ad7c880",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5501",
+    "specs": "Dell Latitude 5501-Ci5-9th H-Ram8gb-SSD256gb-15.6 \"FHD",
+    "price": 14000,
+    "section": "Dell Latitude & Precision Laptop",
+    "image": "/images/laptops/Dell Latitude 5501.jpg"
+  },
+  {
+    "id": "39f8c38f-b0eb-4659-9380-874342d4c897",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5511",
+    "specs": "Dell Latitude 5511-Ci7-10th H-Ram8gb-SSD256gb-15.6 \"FHD",
+    "price": 16500,
+    "section": "Dell Latitude & Precision Laptop",
+    "image": "/images/laptops/Dell Latitude 5511.jpg"
+  },
+  {
+    "id": "f9b59021-9827-4991-a78c-e10aededbe18",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell 15 Inspiron 7000",
+    "specs": "Dell Inspiron15-7000-Ci7-7thHQ-Ram16gb-SSD512gb-15.6\"4K ,VGA4GB Nvidia GTX 1060",
+    "price": 20000,
+    "section": "Dell Latitude & Precision Laptop",
+    "image": "/images/laptops/Dell 15 Inspiron 7000.jpg"
+  },
+  {
+    "id": "2a0fec23-d123-41d3-af98-a71326efdd53",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell G3 Inspiron 3500",
+    "specs": "Dell InspironG3-3500-Ci7-10thH-Ram16gb-SSD512gb-15.6\"FHD ,VGA4GB Nvidia GTX 1650",
+    "price": 28000,
+    "section": "Dell Latitude & Precision Laptop",
+    "image": "/images/laptops/Dell G3 Inspiron 3500.jpg"
+  },
+  {
+    "id": "59a6a59b-38ec-4af0-9705-ea18afd282c0",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5420",
+    "specs": "Dell Latitude 5420 - Ci5-11th - Ram 8gb - SSD 256gb- 14 \"",
+    "price": 14000,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 5420.jpg"
+  },
+  {
+    "id": "97dc6c26-3536-4f83-9631-1d76b5888b24",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 7400",
+    "specs": "Dell Latitude 7400 - Ci7-8th - Ram 16gb - SSD 256gb- 14 \" FHD Touch X360",
+    "price": 16500,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 7400.jpg"
+  },
+  {
+    "id": "f0172f9e-4e25-46de-9500-d15a73b43fd9",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 3330",
+    "specs": "Dell Latitude 3330 - Ci5-11th - Ram 8gb - SSD 256gb- 14 \" FHD Touch X360",
+    "price": 15500,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 3330.jpg"
+  },
+  {
+    "id": "70296f38-6b11-4f68-ad05-bbe5690c39d5",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5400",
+    "specs": "Dell Latitude 5400 - Ci5-8th - Ram 8gb - SSD 256gb- 14 \"",
+    "price": 10000,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 5400.jpg"
+  },
+  {
+    "id": "bc4c448c-feb0-4c48-a853-383a101b32bf",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5500",
+    "specs": "Dell Latitude 5500 - Ci5-8th - Ram 8gb - SSD 256gb- 15.6 \"",
+    "price": 11000,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 5500.jpg"
+  },
+  {
+    "id": "0fafb186-4cee-4d8c-91f6-42f78a1ed353",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5590",
+    "specs": "Dell Latitude 5590 - Ci5-8th - Ram 8gb - SSD 256gb- 15.6 \"",
+    "price": 10500,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 5590.jpg"
+  },
+  {
+    "id": "3ceb72e4-065e-43d1-b3f8-0915e4ed5ff9",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5580",
+    "specs": "Dell Latitude 5580 - Ci5-6th - Ram 8gb - SSD 256gb- 15.6 \"",
+    "price": 7850,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 5580.jpg"
+  },
+  {
+    "id": "a01df937-3a37-48d4-ac19-9cb3623bb1d1",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 7480",
+    "specs": "Dell Latitude 7480 - Ci7-7th - Ram 8gb - SSD 256gb - 14 \"",
+    "price": 10800,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 7480.jpg"
+  },
+  {
+    "id": "432d2a23-10b2-41db-9330-8b35f45e3ae0",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5480",
+    "specs": "Dell Latitude 5480 - Ci5-7th HQ - Ram 8gb - SSD 256gb - 14 \"",
+    "price": 9500,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 5480.jpg"
+  },
+  {
+    "id": "fe7c161c-9281-48d3-ad05-dbbfcfded368",
+    "category": "Laptop",
+    "brand": "Dell",
+    "model": "Dell Latitude 5480",
+    "specs": "Dell Latitude 5480 - Ci5-7th - Ram 8gb - SSD 256gb - 14 \" Touch",
+    "price": 8000,
+    "section": "Dell Latitude Laptop With Touch Screen",
+    "image": "/images/laptops/Dell Latitude 5480.jpg"
+  },
+  {
+    "id": "4dfd76ed-772a-4cc2-919a-edc08d30afee",
+    "category": "Laptop",
+    "brand": "Lenovo",
+    "model": "Lenovo ThinkPad T495",
+    "specs": "Lenovo ThinkPad T495 - Ryzen5-8th - Ram 8gb - SSD 25gb - VGA 2GB - 14\"",
+    "price": 9500,
+    "section": "Lenovo Laptop THinkPad",
+    "image": "/images/laptops/Lenovo ThinkPad T495.jpg"
+  },
+  {
+    "id": "45dd6160-7464-4e57-b2bf-8ea210e0dd51",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "ram 8GB Crucial PC Used DDR4 2400",
+    "specs": "ram 8GB Crucial PC Used DDR4 2400",
+    "price": 1850,
+    "image": "/images/pc/ram 8GB Crucial PC Used DDR4 2400.jpg"
+  },
+  {
+    "id": "06a0c074-bdc1-46da-a922-ab9fced21b58",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "ram 8GB Crucial PC Used DDR4 3200",
+    "specs": "ram 8GB Crucial PC Used DDR4 3200",
+    "price": 2000,
+    "image": "/images/pc/ram 8GB Crucial PC Used DDR4 3200.jpg"
+  },
+  {
+    "id": "1e9a9a22-9ed9-4856-a366-421b585ffb83",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "ram 8GB crucail Used DDR3",
+    "specs": "ram 8GB crucail Used DDR3",
+    "price": 600,
+    "image": "/images/pc/ram 8GB crucail Used DDR3.jpg"
+  },
+  {
+    "id": "e3538745-c491-4395-b63c-1eabcadb1fc9",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "ram 4GB crucail Used DDR3",
+    "specs": "ram 4GB crucail Used DDR3",
+    "price": 300,
+    "image": "/images/pc/ram 4GB crucail Used DDR3.jpg"
+  },
+  {
+    "id": "a1793c96-8c94-4b4d-95f7-d703167736a6",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Ram 16GB DDR4 Laptop 3200 HikSemi",
+    "specs": "Ram 16GB DDR4 Laptop 3200 HikSemi",
+    "price": 4850,
+    "image": "/images/pc/Ram 16GB DDR4 Laptop 3200 HikSemi.jpg"
+  },
+  {
+    "id": "73a64a1c-cbb8-4846-a8ea-8f7bba6450ea",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Ram8GB DDR4 Laptop 3200 HikSemi",
+    "specs": "Ram8GB DDR4 Laptop 3200 HikSemi",
+    "price": 2500,
+    "image": "/images/pc/Ram8GB DDR4 Laptop 3200 HikSemi.jpg"
+  },
+  {
+    "id": "44595b9c-92d6-46e7-b295-4bffae117202",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "VGA GT 730 2GB DDR5 Nvidia",
+    "specs": "VGA GT 730 2GB DDR5 Nvidia",
+    "price": 1500,
+    "image": "/images/pc/VGA GT 730 2GB DDR5 Nvidia.jpg"
+  },
+  {
+    "id": "b89a734d-674d-4cfc-927c-a4c3dfe2ad12",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "VGA R5 430 1GB DDR5 ATI Low Profil",
+    "specs": "VGA R5 430 1GB DDR5 ATI Low Profil",
+    "price": 850,
+    "image": "/images/pc/VGA R5 430 1GB DDR5 ATI Low Profil.jpg"
+  },
+  {
+    "id": "5023389d-a5cf-4d2e-9960-13ffad99a68c",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "VGA R5 430 1GB DDR5 ATI Tower",
+    "specs": "VGA R5 430 1GB DDR5 ATI Tower",
+    "price": 1000,
+    "image": "/images/pc/VGA R5 430 1GB DDR5 ATI Tower.jpg"
+  },
+  {
+    "id": "d9b4b586-0998-433d-9a2a-d0bb4441364d",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "VGA GTX 1050 4GB DDR5 Nvidia 2Fan",
+    "specs": "VGA GTX 1050 4GB DDR5 Nvidia 2Fan",
+    "price": 5500,
+    "image": "/images/pc/VGA GTX 1050 4GB DDR5 Nvidia 2Fan.jpg"
+  },
+  {
+    "id": "8d8407eb-fc8e-4507-aeab-e0f0f2f0d31f",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "VGA GTX 1060 3GB DDR5 Nvidia 2Fan",
+    "specs": "VGA GTX 1060 3GB DDR5 Nvidia 2Fan",
+    "price": 4900,
+    "image": "/images/pc/VGA GTX 1060 3GB DDR5 Nvidia 2Fan.jpg"
+  },
+  {
+    "id": "6ba2947e-1080-453d-81f7-d19afce2c4e1",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "VGA GTX 1660 6GB DDR5 Nvidia 2Fan",
+    "specs": "VGA GTX 1660 6GB DDR5 Nvidia 2Fan",
+    "price": 8250,
+    "image": "/images/pc/VGA GTX 1660 6GB DDR5 Nvidia 2Fan.jpg"
+  },
+  {
+    "id": "afbcc9c2-f3bf-4e80-ba37-451c01af6b2e",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "VGA GTX 1070 8GB DDR5 Nvidia 2Fan",
+    "specs": "VGA GTX 1070 8GB DDR5 Nvidia 2Fan",
+    "price": 9000,
+    "image": "/images/pc/VGA GTX 1070 8GB DDR5 Nvidia 2Fan.jpg"
+  },
+  {
+    "id": "805b0705-4097-4241-885f-1c191dd64b8e",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "SSD 256GB NVME W/D",
+    "specs": "SSD 256GB NVME W/D",
+    "price": 2700,
+    "image": "/images/pc/SSD 256GB NVME WD.jpg"
+  },
+  {
+    "id": "d2657567-e1f8-4f01-a667-5feb2da1f14c",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "HDD_W.D/8T-PURPLE",
+    "specs": "HDD_W.D/8T-PURPLE",
+    "price": 11000,
+    "image": "/images/pc/HDD_W.D8T-PURPLE.jpg"
+  },
+  {
+    "id": "c9da2e4b-5fd0-4eef-8265-7a830b926eb2",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "HDD_W.D/6T-PURPLE",
+    "specs": "HDD_W.D/6T-PURPLE",
+    "price": 8500,
+    "image": "/images/pc/HDD_W.D6T-PURPLE.jpg"
+  },
+  {
+    "id": "f2af7e18-f667-4427-a73f-6ca5d13a0ccd",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "SSD 120 GB Kingston Used",
+    "specs": "SSD 120 GB Kingston Used",
+    "price": 650,
+    "image": "/images/pc/SSD 120 GB Kingston Used.jpg"
+  },
+  {
+    "id": "13123fdb-fbd5-494b-92ed-90a94c6a3eb7",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "HDD_W.D/4T-PURPLE",
+    "specs": "HDD_W.D/4T-PURPLE",
+    "price": 6200,
+    "image": "/images/pc/HDD_W.D4T-PURPLE.jpg"
+  },
+  {
+    "id": "38a76260-a347-4d0a-a722-16a0c88f54e4",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "SSD 1TB Lexar",
+    "specs": "SSD 1TB Lexar",
+    "price": 6700,
+    "image": "/images/pc/SSD 1TB Lexar.jpg"
+  },
+  {
+    "id": "a99a5381-e498-4afa-9bc2-4cd76b4d989e",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "SSD 500 GB Lexar",
+    "specs": "SSD 500 GB Lexar",
+    "price": 3800,
+    "image": "/images/pc/SSD 500 GB Lexar.png"
+  },
+  {
+    "id": "ad77b368-cf2b-4b80-9d0e-c4a8e25d1a9b",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "H.D.D PASSPORT 1TB EXT",
+    "specs": "H.D.D PASSPORT 1TB EXT",
+    "price": 3800,
+    "image": "/images/pc/H.D.D PASSPORT 1TB EXT.jpg"
+  },
+  {
+    "id": "9a37b295-44aa-44dc-ab89-0c7d688ae107",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "H.D.D PASSPORT 4TB EXT",
+    "specs": "H.D.D PASSPORT 4TB EXT",
+    "price": 5900,
+    "image": "/images/pc/H.D.D PASSPORT 4TB EXT.jpg"
+  },
+  {
+    "id": "57bb72fb-33f2-4e84-9ce2-0c88c3695a5a",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "H.D.D PASSPORT 5TB EXT",
+    "specs": "H.D.D PASSPORT 5TB EXT",
+    "price": 6750,
+    "image": "/images/pc/H.D.D PASSPORT 5TB EXT.jpg"
+  },
+  {
+    "id": "0314fc61-925c-4957-b310-42a0597cd46f",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "H.S 128 GB",
+    "specs": "H.S 128 GB",
+    "price": 1300,
+    "image": "/images/pc/H.S 128 GB.jpg"
+  },
+  {
+    "id": "0c0d6264-c808-421f-b8b6-921bbe4b57c0",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Lexar 128 GB",
+    "specs": "Lexar 128 GB",
+    "price": 1500,
+    "image": "/images/pc/Lexar 128 GB.jpg"
+  },
+  {
+    "id": "baaf18e5-a196-46eb-a52e-41c773fa72c3",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Lexar 240 GB",
+    "specs": "Lexar 240 GB",
+    "price": 2500,
+    "image": "/images/pc/Lexar 240 GB.jpg"
+  },
+  {
+    "id": "086df450-7cfb-4561-9152-2ba7f36e6063",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "SSD 1TB nvme Lexar",
+    "specs": "SSD 1TB nvme Lexar",
+    "price": 6700,
+    "image": "/images/pc/SSD 1TB nvme Lexar.jpg"
+  },
+  {
+    "id": "e4856e27-588f-4a86-adc7-da69587d5465",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "SSD 240 GB Kingston Used",
+    "specs": "SSD 240 GB Kingston Used",
+    "price": 1500,
+    "image": "/images/pc/SSD 240 GB Kingston Used.jpg"
+  },
+  {
+    "id": "0379db25-18d6-46f0-ad2e-bb8141082808",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "led 22\"HP HDMI F.L",
+    "specs": "led 22\"HP HDMI F.L",
+    "price": 2700,
+    "image": "/images/pc/led 22HP HDMI F.L.jpg"
+  },
+  {
+    "id": "138a392d-6e34-47ac-a96c-2d19a7a199d5",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Led 24\" Lenovo F.L",
+    "specs": "Led 24\" Lenovo F.L",
+    "price": 2750,
+    "image": "/images/pc/Led 24 Lenovo F.L.jpg"
+  },
+  {
+    "id": "724eef21-6cc6-4d48-ac4c-379b47249009",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "led 24\" Samsung S3",
+    "specs": "led 24\" Samsung S3",
+    "price": 4750,
+    "image": "/images/pc/led 24 Samsung S3.jpg"
+  },
+  {
+    "id": "82c0389c-f8be-4eb5-adad-932eaab6b493",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "led 27\" Samsung S3",
+    "specs": "led 27\" Samsung S3",
+    "price": 5500,
+    "image": "/images/pc/led 27 Samsung S3.jpg"
+  },
+  {
+    "id": "03c19b1e-ee36-4a8e-b550-861f33ca548b",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "led 24\" Dell DP",
+    "specs": "led 24\" Dell DP",
+    "price": 2000,
+    "image": "/images/pc/led 24 Dell DP.jpg"
+  },
+  {
+    "id": "b84e48de-45c1-45a4-9dad-e58ce43a007c",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "led 22\" Dell DP",
+    "specs": "led 22\" Dell DP",
+    "price": 1600,
+    "image": "/images/pc/led 22 Dell DP.jpg"
+  },
+  {
+    "id": "ae4b2d81-43e3-4ea6-bfb9-c521fa18eeeb",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "led 24\" HP HDMI",
+    "specs": "led 24\" HP HDMI",
+    "price": 2200,
+    "image": "/images/pc/led 24 HP HDMI.jpg"
+  },
+  {
+    "id": "4dadc70b-220a-4331-b4e1-83400aee1f65",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Led 24\" Dell F.L",
+    "specs": "Led 24\" Dell F.L",
+    "price": 2900,
+    "image": "/images/pc/Led 24 Dell F.L.jpg"
+  },
+  {
+    "id": "1f44fe38-f9e6-4ba7-9b77-50a4b5fe95dd",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "led 24\" Dell HDMI",
+    "specs": "led 24\" Dell HDMI",
+    "price": 2100,
+    "image": "/images/pc/led 24 Dell HDMI.jpg"
+  },
+  {
+    "id": "99c876c3-cd96-425c-b680-387bda3b8d12",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Led 23\" HP HDMI",
+    "specs": "Led 23\" HP HDMI",
+    "price": 1850,
+    "image": "/images/pc/Led 23 HP HDMI.jpg"
+  },
+  {
+    "id": "0b400d56-2cc4-4a33-8f26-9e021beadc74",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Led 24\" Dell DVI + VGA",
+    "specs": "Led 24\" Dell DVI + VGA",
+    "price": 1750,
+    "image": "/images/pc/Led 24 Dell DVI + VGA.jpg"
+  },
+  {
+    "id": "56e07985-45c9-4861-84a5-88c95177c6f8",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "led 23\" HP DP",
+    "specs": "led 23\" HP DP",
+    "price": 1700,
+    "image": "/images/pc/led 23 HP DP.jpg"
+  },
+  {
+    "id": "8ea1bb55-4be7-403b-8d0c-7b9a254b5aa5",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i5 ,8,H.D.D 500GB D HP 7TH",
+    "specs": "Used core i5 ,8,H.D.D 500GB D HP 7TH",
+    "price": 5000,
+    "image": "/images/pc/Used core i5 ,8,H.D.D 500GB D HP 7TH.jpg"
+  },
+  {
+    "id": "5c5b2148-a209-4fbc-9712-28738d24c6dd",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Dell Optiplex 3020 i3-4th,4GB,500GB T",
+    "specs": "Dell Optiplex 3020 i3-4th,4GB,500GB T",
+    "price": 2500,
+    "image": "/images/pc/Dell Optiplex 3020 i3-4th,4GB,500GB T.jpg"
+  },
+  {
+    "id": "9937e0c7-6300-4ad3-9e74-b1d283f7d9a5",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i5-9th,500,8GB HP T 600 G5",
+    "specs": "Used core i5-9th,500,8GB HP T 600 G5",
+    "price": 8500,
+    "image": "/images/pc/Used core i5-9th,500,8GB HP T 600 G5.jpg"
+  },
+  {
+    "id": "2acfd5bb-da57-4d34-9710-a008e11936a8",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "HP AMD A6 ,4,250 D VGA2GB",
+    "specs": "HP AMD A6 ,4,250 D VGA2GB",
+    "price": 2100,
+    "image": "/images/pc/Adaptor Acer.jpg"
+  },
+  {
+    "id": "6b34f3e5-99b3-4e65-beed-495c511579b4",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i3 ,4,500 D HP 4TH",
+    "specs": "Used core i3 ,4,500 D HP 4TH",
+    "price": 2750,
+    "image": "/images/pc/Adaptor Acer.jpg"
+  },
+  {
+    "id": "ee675e56-4254-46cd-9a2a-62869961a5c8",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i5 ,8,500 D HP 4TH",
+    "specs": "Used core i5 ,8,500 D HP 4TH",
+    "price": 3300,
+    "image": "/images/pc/Used core i5 ,8,500 D HP 4TH.jpg"
+  },
+  {
+    "id": "783d2307-d1d1-4cf9-98ef-a1ddcddcb665",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i5 ,4,500 D HP 4TH",
+    "specs": "Used core i5 ,4,500 D HP 4TH",
+    "price": 3000,
+    "image": "/images/pc/Adaptor Acer.jpg"
+  },
+  {
+    "id": "a905d31d-1f26-429b-99fd-40502895ccca",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i5 ,8,500 T HP 4TH",
+    "specs": "Used core i5 ,8,500 T HP 4TH",
+    "price": 3500,
+    "image": "/images/pc/Used core i5 ,8,500 T HP 4TH.jpg"
+  },
+  {
+    "id": "bb292eee-553c-41a0-be76-a9c73d28c109",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Dell Optiplex 3020 i5-4th,8GB,500GB T",
+    "specs": "Dell Optiplex 3020 i5-4th,8GB,500GB T",
+    "price": 3500,
+    "image": "/images/pc/Dell Optiplex 3020 i5-4th,8GB,500GB T.jpg"
+  },
+  {
+    "id": "dc3e2ec6-d005-406e-9243-60498433d52d",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i5-10th,500,8GB HP T 600 G5",
+    "specs": "Used core i5-10th,500,8GB HP T 600 G5",
+    "price": 13000,
+    "image": "/images/pc/Used core i5-10th,500,8GB HP T 600 G5.jpg"
+  },
+  {
+    "id": "5c9dd027-cd77-4115-ac80-afc7eaf370e1",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i7-9th,500,8GB HP T 600 G5",
+    "specs": "Used core i7-9th,500,8GB HP T 600 G5",
+    "price": 13500,
+    "image": "/images/pc/Adaptor Acer.jpg"
+  },
+  {
+    "id": "869a2587-155e-4f77-bc90-d13a29d7b9e8",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i5 ,8,500 D HP 6TH G3",
+    "specs": "Used core i5 ,8,500 D HP 6TH G3",
+    "price": 4500,
+    "image": "/images/pc/Used core i5 ,8,500 D HP 6TH G3.jpg"
+  },
+  {
+    "id": "3c8d2493-87f1-4495-8403-75229f1e2af5",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i7 ,8,500 T,7TH",
+    "specs": "Used core i7 ,8,500 T,7TH",
+    "price": 8000,
+    "image": "/images/pc/Used core i7 ,8,500 T,7TH.jpg"
+  },
+  {
+    "id": "b4ccd42f-2f78-458e-b553-cc49e154b183",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i5 ,8,500 T,7TH",
+    "specs": "Used core i5 ,8,500 T,7TH",
+    "price": 5500,
+    "image": "/images/pc/Used core i5 ,8,500 T,7TH.jpg"
+  },
+  {
+    "id": "84eddac5-8641-4ead-93f5-f9a832b2c3e6",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Used core i7 ,8,500 T,4TH",
+    "specs": "Used core i7 ,8,500 T,4TH",
+    "price": 4200,
+    "image": "/images/pc/Used core i7 ,8,500 T,4TH.jpg"
+  },
+  {
+    "id": "a7296e6b-ab8d-44db-92c3-26b919d37504",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Mouse Lenovo USB",
+    "specs": "Mouse Lenovo USB",
+    "price": 100,
+    "image": "/images/pc/Mouse Lenovo USB.jpg"
+  },
+  {
+    "id": "47996566-b045-4332-9650-887c339ee4bc",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Mouse HP,Dell original",
+    "specs": "Mouse HP,Dell original",
+    "price": 100,
+    "image": "/images/pc/Mouse HP,Dell original.jpg"
+  },
+  {
+    "id": "c70ea08b-1fea-440f-abcb-738f01ed08c3",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "FLASH 32GB KINGSTON G4",
+    "specs": "FLASH 32GB KINGSTON G4",
+    "price": 250,
+    "image": "/images/pc/FLASH 32GB KINGSTON G4.jpg"
+  },
+  {
+    "id": "35aab907-cdb5-4083-9811-1893d3159c5b",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "FLASH 64GB KINGSTON G4",
+    "specs": "FLASH 64GB KINGSTON G4",
+    "price": 300,
+    "image": "/images/pc/FLASH 64GB KINGSTON G4.jpg"
+  },
+  {
+    "id": "bbac5bb7-6743-4bbb-8c8f-bee6279ab18a",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Mouse Targus USB",
+    "specs": "Mouse Targus USB",
+    "price": 100,
+    "image": "/images/pc/Mouse Targus USB.jpg"
+  },
+  {
+    "id": "5c9aed63-7ceb-448e-be93-ddc7908c6ff0",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "MOUSE W.L Bluetooth",
+    "specs": "MOUSE W.L Bluetooth",
+    "price": 150,
+    "image": "/images/pc/MOUSE W.L Bluetooth.jpg"
+  },
+  {
+    "id": "8b88025f-8c20-4b3b-a8cd-3da9e60228ce",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "MOUSE USB HP",
+    "specs": "MOUSE USB HP",
+    "price": 100,
+    "image": "/images/pc/MOUSE USB HP.jpg"
+  },
+  {
+    "id": "b869456e-cb27-4500-8c93-062e09da4d60",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "MOUSE USB Dell",
+    "specs": "MOUSE USB Dell",
+    "price": 150,
+    "image": "/images/pc/MOUSE USB Dell.jpg"
+  },
+  {
+    "id": "572f4939-1281-45d4-aa66-79cefd4ff692",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "K.B + Mouse Wireless Fv300",
+    "specs": "K.B + Mouse Wireless Fv300",
+    "price": 550,
+    "image": "/images/pc/K.B + Mouse Wireless Fv300.jpg"
+  },
+  {
+    "id": "fade42fd-ef84-428b-bd3e-66ec338983ef",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Headphone Gigamax 2 Socket G530",
+    "specs": "Headphone Gigamax 2 Socket G530",
+    "price": 400,
+    "image": "/images/pc/Headphone Gigamax 2 Socket G530.jpg"
+  },
+  {
+    "id": "7d581457-9f9c-4461-bdf0-02ca789616f4",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Headphone Gigamax 1 Socket G530 Pin",
+    "specs": "Headphone Gigamax 1 Socket G530 Pin",
+    "price": 350,
+    "image": "/images/pc/Headphone Gigamax 1 Socket G530 Pin.jpg"
+  },
+  {
+    "id": "efdfa93b-dc60-47c0-8603-693a5995e141",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Bag Laptop Back",
+    "specs": "Bag Laptop Back",
+    "price": 250,
+    "image": "/images/pc/Bag Laptop Back Cat.jpg"
+  },
+  {
+    "id": "d97bd67b-fcf3-48ef-9a05-c71694919a55",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Bag Laptop Back Cat",
+    "specs": "Bag Laptop Back Cat",
+    "price": 300,
+    "image": "/images/pc/Bag Laptop Back Cat.jpg"
+  },
+  {
+    "id": "5cc92e33-d328-448b-8d2f-a3304d216656",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Bag Laptop Public",
+    "specs": "Bag Laptop Public",
+    "price": 150,
+    "image": "/images/pc/Bag Laptop Public.jpg"
+  },
+  {
+    "id": "a21eebf4-53a6-4d2f-b4ee-4b7552370aac",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "K.B original USB Dell New",
+    "specs": "K.B original USB Dell New",
+    "price": 300,
+    "image": "/images/pc/K.B original USB Dell New.jpg"
+  },
+  {
+    "id": "dca8e93e-bde7-4282-b7bb-07c5172df01a",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "K.B USB New",
+    "specs": "K.B USB New",
+    "price": 150,
+    "image": "/images/pc/K.B USB New.jpg"
+  },
+  {
+    "id": "e661883f-1b42-48e0-8c3c-0e852e280655",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Adaptor HP",
+    "specs": "Adaptor HP",
+    "price": 250,
+    "image": "/images/pc/Adaptor HP.jpg"
+  },
+  {
+    "id": "2a79b2b3-155b-4c0c-921c-699f43b8dc14",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Speaker G.Max RGB",
+    "specs": "Speaker G.Max RGB",
+    "price": 375,
+    "image": "/images/pc/Speaker G.Max RGB.jpg"
+  },
+  {
+    "id": "36d2ead0-962b-44a2-9e33-9162dc639547",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Adaptor Dell",
+    "specs": "Adaptor Dell",
+    "price": 150,
+    "image": "/images/pc/Adaptor Dell.jpg"
+  },
+  {
+    "id": "be6f4654-ab24-417e-89ee-fa6a3082d6ea",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Mouse Pad 2B",
+    "specs": "Mouse Pad 2B",
+    "price": 100,
+    "image": "/images/pc/Mouse Pad 2B.jpg"
+  },
+  {
+    "id": "e6233641-ff56-4c32-8c3e-dd45fe75eba4",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Adaptor Lenovo",
+    "specs": "Adaptor Lenovo",
+    "price": 250,
+    "image": "/images/pc/Adaptor Lenovo.jpg"
+  },
+  {
+    "id": "a81a73e7-a2d1-4db0-b672-722ae64a78f7",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Speaker Point 122",
+    "specs": "Speaker Point 122",
+    "price": 325,
+    "image": "/images/pc/Speaker Point 122.jpg"
+  },
+  {
+    "id": "3d17dd8c-b5d2-43df-92d1-fde4343cb651",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Adaptor Toshiba",
+    "specs": "Adaptor Toshiba",
+    "price": 150,
+    "image": "/images/pc/Adaptor Toshiba.jpg"
+  },
+  {
+    "id": "5debcb5d-d05c-43ff-a447-adcb81eb8fdc",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Speaker MJK 1007",
+    "specs": "Speaker MJK 1007",
+    "price": 300,
+    "image": "/images/pc/Speaker MJK 1007.jpg"
+  },
+  {
+    "id": "61cfbac1-66d9-4b8c-a858-a413ff095e3f",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "K.B original USB",
+    "specs": "K.B original USB",
+    "price": 150,
+    "image": "/images/pc/K.B original USB Dell New.jpg"
+  },
+  {
+    "id": "a9e8a91b-d60c-4a03-8d03-ddeda61fd42a",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "K.B Jill USB",
+    "specs": "K.B Jill USB",
+    "price": 250,
+    "image": "/images/pc/K.B Jill USB.jpg"
+  },
+  {
+    "id": "3e2129cd-d272-49a4-99dd-3132f6c9a900",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Adaptor Acer",
+    "specs": "Adaptor Acer",
+    "price": 250,
+    "image": "/images/pc/Adaptor Acer.jpg"
+  },
+  {
+    "id": "a845adc7-768e-432f-a692-78413c6d29cf",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Adaptor Asus",
+    "specs": "Adaptor Asus",
+    "price": 250,
+    "image": "/images/pc/Adaptor Asus.jpg"
+  },
+  {
+    "id": "49706ea8-e9f2-4ae9-a7b6-fd0af2d243ab",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Adaptor Samsung",
+    "specs": "Adaptor Samsung",
+    "price": 250,
+    "image": "/images/pc/Adaptor Samsung.jpg"
+  },
+  {
+    "id": "50f7670f-1ae5-4499-9a4a-f41372327470",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Power Joint For a 3 port",
+    "specs": "Power Joint For a 3 port",
+    "price": 300,
+    "image": "/images/pc/Power Joint For a 3 port.jpg"
+  },
+  {
+    "id": "5cc0d14e-f1ce-4024-8ee6-cb536bffed2a",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Power Joint 5 port",
+    "specs": "Power Joint 5 port",
+    "price": 150,
+    "image": "/images/pc/Power Joint 5 port.jpg"
+  },
+  {
+    "id": "c1687cb5-b039-4f42-8644-e7ba253434d1",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Power Joint 7 port",
+    "specs": "Power Joint 7 port",
+    "price": 200,
+    "image": "/images/pc/Power Joint 7 port.jpg"
+  },
+  {
+    "id": "c69be889-08a2-45c2-a535-1baaa3b46b3e",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Power Joint 9 port",
+    "specs": "Power Joint 9 port",
+    "price": 250,
+    "image": "/images/pc/Power Joint 9 port.jpg"
+  },
+  {
+    "id": "00e000ed-3a76-4872-9dbf-60f7df78b147",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "K.B + Mouse Wireless Dell",
+    "specs": "K.B + Mouse Wireless Dell",
+    "price": 450,
+    "image": "/images/pc/K.B + Mouse Wireless Dell.jpg"
+  },
+  {
+    "id": "8de6af16-829d-4f6f-9a6a-e6e880d78d34",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Cable DP to HDMI",
+    "specs": "Cable DP to HDMI",
+    "price": 100,
+    "image": "/images/pc/Cable DP to HDMI.jpg"
+  },
+  {
+    "id": "f331baeb-e09a-442a-8194-f579a125dac9",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "cable screen",
+    "specs": "cable screen",
+    "price": 100,
+    "image": "/images/pc/cable screen.jpg"
+  },
+  {
+    "id": "1e5f52dc-4225-40bb-ad71-6d63dec691b2",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Cable DP Original",
+    "specs": "Cable DP Original",
+    "price": 100,
+    "image": "/images/pc/Cable DP Original.jpg"
+  },
+  {
+    "id": "cbb86430-98e2-48a5-8edb-088da08d8891",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Cable DVI",
+    "specs": "Cable DVI",
+    "price": 100,
+    "image": "/images/pc/Cable DVI.jpg"
+  },
+  {
+    "id": "ba9dd34f-3c02-4904-b85c-6423f89010f6",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Cable HDMI 1.5M",
+    "specs": "Cable HDMI 1.5M",
+    "price": 100,
+    "image": "/images/pc/Cable HDMI 1.5M.jpg"
+  },
+  {
+    "id": "7af39f55-d103-426e-9591-12b9e6780bba",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Cable DP to VGA",
+    "specs": "Cable DP to VGA",
+    "price": 100,
+    "image": "/images/pc/Cable DP to VGA.jpg"
+  },
+  {
+    "id": "74a255bf-729c-4f77-80cd-813cc31bf416",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "VGA to HDMI",
+    "specs": "VGA to HDMI",
+    "price": 100,
+    "image": "/images/pc/VGA to HDMI.jpg"
+  },
+  {
+    "id": "ddf8e05b-0224-4979-b0f7-5ce110ba90a7",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Cooler Fan Laptop Giga max",
+    "specs": "Cooler Fan Laptop Giga max",
+    "price": 450,
+    "image": "/images/pc/Cooler Fan Laptop Giga max.jpg"
+  },
+  {
+    "id": "c1950586-59a9-460d-b33e-bf1a3dcf82f2",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "cable power PC",
+    "specs": "cable power PC",
+    "price": 100,
+    "image": "/images/pc/cable power PC.jpg"
+  },
+  {
+    "id": "d4d24920-c062-472a-a1b5-cff24b45b246",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "cable power Laptop",
+    "specs": "cable power Laptop",
+    "price": 100,
+    "image": "/images/pc/cable power Laptop.jpg"
+  },
+  {
+    "id": "0bf2b927-52f1-4b10-9511-8133b21ce71e",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Cooler Fan Laptop FN01",
+    "specs": "Cooler Fan Laptop FN01",
+    "price": 250,
+    "image": "/images/pc/Cooler Fan Laptop FN01.jpg"
+  },
+  {
+    "id": "a7c84c78-7ec3-4ece-b33f-7144157e49ec",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Rack USB 3.0",
+    "specs": "Rack USB 3.0",
+    "price": 200,
+    "image": "/images/pc/Rack USB 3.0.jpg"
+  },
+  {
+    "id": "ca5aad3e-7b4b-4661-a0a5-3635a6d32712",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Caddy Slim",
+    "specs": "Caddy Slim",
+    "price": 100,
+    "image": "/images/pc/Caddy Slim.jpg"
+  },
+  {
+    "id": "85bfed98-e221-4b1d-bc87-1976f965b691",
+    "category": "PC",
+    "brand": "Generic",
+    "model": "Caddy Fat",
+    "specs": "Caddy Fat",
+    "price": 100,
+    "image": "/images/pc/Caddy Fat.jpg"
+  }
+]

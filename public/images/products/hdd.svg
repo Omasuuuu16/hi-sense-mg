@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400">
+  <!-- Case -->
+  <rect x="100" y="50" width="400" height="300" rx="5" fill="#bdc3c7" stroke="#7f8c8d" stroke-width="4" />
+  
+  <!-- Platter Area -->
+  <circle cx="300" cy="200" r="110" fill="#95a5a6" stroke="#7f8c8d" stroke-width="2" />
+  <circle cx="300" cy="200" r="30" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2" />
+  
+  <!-- Arm -->
+  <path d="M420 320 L300 200 L320 180 Z" fill="#34495e" />
+  
+  <!-- Screws -->
+  <circle cx="120" cy="70" r="5" fill="#ecf0f1" stroke="#7f8c8d" />
+  <circle cx="480" cy="70" r="5" fill="#ecf0f1" stroke="#7f8c8d" />
+  <circle cx="120" cy="330" r="5" fill="#ecf0f1" stroke="#7f8c8d" />
+  <circle cx="480" cy="330" r="5" fill="#ecf0f1" stroke="#7f8c8d" />
+  
+  <rect x="200" y="350" width="200" height="20" fill="#333" />
+</svg>

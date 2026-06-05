@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <!-- Stand -->
+  <path d="M350 400 L450 400 L470 550 L330 550 Z" fill="#333" />
+  <rect x="250" y="550" width="300" height="20" rx="5" fill="#222" />
+  
+  <!-- Screen Bezel -->
+  <rect x="100" y="50" width="600" height="380" rx="10" fill="#111" />
+  
+  <!-- Screen Area -->
+  <rect x="120" y="70" width="560" height="340" fill="#3498db" />
+  
+  <!-- Screen Content -->
+  <circle cx="400" cy="240" r="50" fill="#fff" opacity="0.5" />
+  <path d="M350 280 L450 280 L400 200 Z" fill="#fff" opacity="0.5" />
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <!-- PCB -->
+  <rect x="50" y="150" width="700" height="100" rx="5" fill="#2ecc71" stroke="#27ae60" stroke-width="2"/>
+  
+  <!-- Chips -->
+  <rect x="100" y="160" width="80" height="60" fill="#2c3e50" />
+  <rect x="200" y="160" width="80" height="60" fill="#2c3e50" />
+  <rect x="300" y="160" width="80" height="60" fill="#2c3e50" />
+  <rect x="420" y="160" width="80" height="60" fill="#2c3e50" />
+  <rect x="520" y="160" width="80" height="60" fill="#2c3e50" />
+  <rect x="620" y="160" width="80" height="60" fill="#2c3e50" />
+  
+  <!-- Pins -->
+  <rect x="50" y="250" width="700" height="10" fill="#f1c40f" />
+  <line x1="400" y1="250" x2="400" y2="260" stroke="#27ae60" stroke-width="4" />
+  
+  <text x="400" y="130" font-family="Arial, sans-serif" font-weight="bold" font-size="30" text-anchor="middle" fill="#27ae60">DDR4 MEMORY</text>
+</svg>
