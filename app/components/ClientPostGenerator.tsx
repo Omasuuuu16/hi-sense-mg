@@ -6,6 +6,7 @@ import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { StoreProduct } from '../lib/redis-store';
 import { parseSpecs, modelToSlug } from '../lib/specs-parser';
+import { getSmartLaptopImage, getSmartPcImage, getStringHash } from '../lib/image-utils';
 
 export interface ClientPostGeneratorRef {
     generatePost: (products: StoreProduct[], categories: string[] | undefined, postText: string) => Promise<void>;
@@ -142,6 +143,8 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                     doc.close();
                 };
 
+                const origin = window.location.origin;
+
                 for (let i = 0; i < laptops.length; i++) {
                     const product = laptops[i];
                     props.onProgress(`Generating Laptop ${i + 1}/${laptops.length}: ${product.model}...`);
@@ -152,6 +155,10 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                     const ssd = (parsed.ssd || product.ssd || '—').replace(/GB|TB/i, m => m.toLowerCase());
                     const display = parsed.display || product.display || '—';
 
+                    // Use smart image picker so we always get a valid image regardless of DB value
+                    const hash = getStringHash(product.model + '-' + (product.id || String(i)));
+                    const laptopImg = origin + getSmartLaptopImage(product.brand || 'HP', product.model, hash);
+
                     let html = laptopTemplate
                         .replace(/\{\{MODEL\}\}/g, product.model.toUpperCase())
                         .replace(/\{\{CPU\}\}/g, cpu)
@@ -159,7 +166,7 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                         .replace(/\{\{SSD\}\}/g, ssd)
                         .replace(/\{\{DISPLAY\}\}/g, display)
                         .replace(/\{\{PRICE\}\}/g, product.price.toLocaleString('en-US'))
-                        .replace(/\{\{LAPTOP_IMAGE\}\}/g, product.image || '/images/laptops/HP.jpg');
+                        .replace(/\{\{LAPTOP_IMAGE\}\}/g, laptopImg);
 
                     const slug = modelToSlug(product.model);
                     await generateNode(html, `laptop_${slug}.png`);
@@ -168,12 +175,15 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                 for (let i = 0; i < pcs.length; i++) {
                     const product = pcs[i];
                     props.onProgress(`Generating PC Part ${i + 1}/${pcs.length}: ${product.model}...`);
+
+                    const pcHash = getStringHash(product.model + '-' + (product.id || String(i)));
+                    const pcImg = origin + getSmartPcImage(product.model, pcHash);
                     
                     let html = pcTemplate
                         .replace(/\{\{MODEL\}\}/g, product.model.toUpperCase())
                         .replace(/\{\{SPECS\}\}/g, product.specs || product.model)
                         .replace(/\{\{PRICE\}\}/g, product.price.toLocaleString('en-US'))
-                        .replace(/\{\{PC_IMAGE\}\}/g, product.image || '/images/pc/SSD 256GB NVME WD.jpg');
+                        .replace(/\{\{PC_IMAGE\}\}/g, pcImg);
 
                     const slug = modelToSlug(product.model);
                     await generateNode(html, `pc_${slug}.png`);
