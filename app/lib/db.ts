@@ -9,37 +9,40 @@ const DB_USER = process.env.DB_USER || 'root';
 const DB_PASSWORD = process.env.DB_PASSWORD || '';
 const DB_NAME = process.env.DB_NAME || 'hisense_db';
 
-let pool: mysql.Pool | null = null;
-let initialized = false;
+// Prevent multiple pools in development due to Next.js Hot Module Replacement (HMR)
+const globalForDb = global as unknown as {
+    pool: mysql.Pool | undefined;
+    initialized: boolean | undefined;
+};
 
 async function getPool(): Promise<mysql.Pool> {
-    if (!pool) {
+    if (!globalForDb.pool) {
         // Create pool without database first to allow database auto-creation if not exists
-        pool = mysql.createPool({
+        globalForDb.pool = mysql.createPool({
             host: DB_HOST,
             user: DB_USER,
             password: DB_PASSWORD,
             waitForConnections: true,
             connectionLimit: 10,
-            queueLimit: 0
+            queueLimit: 0,
+            connectTimeout: 10000
         });
     }
-    return pool;
+    return globalForDb.pool;
 }
 
 export async function initializeDB() {
-    if (initialized) return;
+    if (globalForDb.initialized) return;
 
     try {
         const tempPool = await getPool();
 
         // 1. Create database if it doesn't exist
         await tempPool.query(`CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\``);
-        console.log(`Database '${DB_NAME}' created or already exists.`);
 
         // Recreate pool with the specific database selected
         await tempPool.end();
-        pool = mysql.createPool({
+        globalForDb.pool = mysql.createPool({
             host: DB_HOST,
             user: DB_USER,
             password: DB_PASSWORD,
@@ -48,6 +51,7 @@ export async function initializeDB() {
             connectionLimit: 10,
             queueLimit: 0
         });
+        const pool = globalForDb.pool;
 
         // 2. Create users table
         await pool.query(`
@@ -74,10 +78,31 @@ export async function initializeDB() {
                 price DECIMAL(10, 2) NOT NULL,
                 section VARCHAR(255) NULL,
                 image VARCHAR(255) NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                cpu VARCHAR(100) NULL,
+                ram VARCHAR(50) NULL,
+                ssd VARCHAR(50) NULL,
+                display VARCHAR(100) NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         `);
         console.log("Table 'products' verified.");
+
+        // Migrate existing tables — add new columns if missing
+        const newColumns = [
+            { name: 'cpu', def: 'VARCHAR(100) NULL' },
+            { name: 'ram', def: 'VARCHAR(50) NULL' },
+            { name: 'ssd', def: 'VARCHAR(50) NULL' },
+            { name: 'display', def: 'VARCHAR(100) NULL' },
+            { name: 'updated_at', def: 'TIMESTAMP NULL DEFAULT NULL' },
+        ];
+        for (const col of newColumns) {
+            try {
+                await pool.query(`ALTER TABLE products ADD COLUMN ${col.name} ${col.def}`);
+            } catch {
+                // Column already exists
+            }
+        }
 
         // 4. Seed default admin if no users exist
         const [users] = await pool.query('SELECT COUNT(*) as count FROM users');
@@ -127,7 +152,7 @@ export async function initializeDB() {
             }
         }
 
-        initialized = true;
+        globalForDb.initialized = true;
         console.log("Database initialization complete.");
     } catch (error) {
         console.error("Database initialization failed:", error);

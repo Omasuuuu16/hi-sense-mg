@@ -28,41 +28,26 @@ interface ProductCardProps {
 // ── Real laptop images from /public/images/laptops/ ──────────────────────────
 const LAPTOP_IMAGE_POOLS: Record<string, string[]> = {
     hp: [
-        '/images/laptops/HP Pro Book 440 G1.jpg',
-        '/images/laptops/HP Pro Book 640 G5.jpg',
-        '/images/laptops/HP Z Book G6.jpg',
-        '/images/laptops/HP Z Book Studio G7.jpg',
-        '/images/laptops/HP AMD Ryzen.jpg',
+        '/images/laptops/HP.jpg',
+        '/images/laptops/HP2.avif',
     ],
     dell: [
-        '/images/laptops/Dell Latitude 5420.jpg',
-        '/images/laptops/Dell Latitude 5400.jpg',
-        '/images/laptops/Dell Latitude 5480.jpg',
-        '/images/laptops/Dell Latitude 5500.jpg',
-        '/images/laptops/Dell Latitude 5501.jpg',
-        '/images/laptops/Dell Latitude 5511.jpg',
-        '/images/laptops/Dell Latitude 5580.jpg',
-        '/images/laptops/Dell Latitude 5590.jpg',
-        '/images/laptops/Dell Latitude 5591.webp',
-        '/images/laptops/Dell Latitude 7400.jpg',
-        '/images/laptops/Dell Latitude 7480.jpg',
-        '/images/laptops/Dell Latitude 3330.jpg',
-        '/images/laptops/Dell 15 Inspiron 7000.jpg',
-        '/images/laptops/Dell G3 Inspiron 3500.jpg',
+        '/images/laptops/Dell.png',
+        '/images/laptops/Dell2.avif',
+        '/images/laptops/Dell3.avif',
     ],
     lenovo: [
-        '/images/laptops/Lenovo ThinkPad T495.jpg',
-        '/images/laptops/Dell Latitude 5420.jpg',
-        '/images/laptops/HP Pro Book 640 G5.jpg',
-        '/images/laptops/HP Z Book Studio G7.jpg',
-        '/images/laptops/Dell Latitude 7400.jpg',
+        '/images/laptops/Lenovo.avif',
+        '/images/laptops/Lenovo2.avif',
+        '/images/laptops/thinkpad.jpg',
+        '/images/laptops/thinkpad2.jpg',
+        '/images/laptops/lenovoLOQ.jpg',
+    ],
+    asus: [
+        '/images/laptops/asus.png',
     ],
     default: [
-        '/images/laptops/Dell Latitude 5420.jpg',
-        '/images/laptops/HP Pro Book 640 G5.jpg',
-        '/images/laptops/Lenovo ThinkPad T495.jpg',
-        '/images/laptops/HP Z Book G6.jpg',
-        '/images/laptops/Dell Latitude 7400.jpg',
+        '/images/laptops/HP.jpg',
     ],
 };
 
@@ -91,19 +76,49 @@ const PC_IMAGE_POOLS: Record<string, string[]> = {
 };
 
 export function getSmartLaptopImage(brand: string, modelName: string, index: number): string {
-    const key = brand.toLowerCase().split(' ')[0];
-    const pool = LAPTOP_IMAGE_POOLS[key] ?? LAPTOP_IMAGE_POOLS.default;
-    // Try to match model name to a specific image first
     const modelLower = modelName.toLowerCase();
-    for (const img of pool) {
-        const filename = img.split('/').pop()?.toLowerCase() ?? '';
-        if (modelLower.includes('latitude') && filename.includes('latitude')) return img;
-        if (modelLower.includes('inspiron') && filename.includes('inspiron')) return img;
-        if (modelLower.includes('thinkpad') && filename.includes('thinkpad')) return img;
-        if (modelLower.includes('probook') && filename.includes('pro book')) return img;
-        if (modelLower.includes('zbook') && filename.includes('z book')) return img;
+    const brandLower = brand.toLowerCase();
+    const combined = `${brandLower} ${modelLower}`.toLowerCase();
+
+    // ThinkPad
+    if (combined.includes('thinkpad')) {
+        return combined.includes('x1') || combined.includes('x13') || combined.includes('t14')
+            ? '/images/laptops/thinkpad2.jpg'
+            : '/images/laptops/thinkpad.jpg';
     }
-    return pool[index % pool.length];
+
+    // Lenovo LOQ / gaming
+    if (combined.includes('loq') || combined.includes('legion') || combined.includes('ideapad gaming')) {
+        return '/images/laptops/lenovoLOQ.jpg';
+    }
+
+    // Generic Lenovo
+    if (combined.includes('lenovo') || brandLower === 'lenovo') {
+        return (index % 2 === 0)
+            ? '/images/laptops/Lenovo.avif'
+            : '/images/laptops/Lenovo2.avif';
+    }
+
+    // HP
+    if (combined.includes(' hp') || brandLower === 'hp' || combined.startsWith('hp')) {
+        return (index % 2 === 0)
+            ? '/images/laptops/HP.jpg'
+            : '/images/laptops/HP2.avif';
+    }
+
+    // Dell
+    if (combined.includes('dell') || brandLower === 'dell') {
+        const idx = index % 3;
+        return ['/images/laptops/Dell.png', '/images/laptops/Dell2.avif', '/images/laptops/Dell3.avif'][idx];
+    }
+
+    // ASUS
+    if (combined.includes('asus') || brandLower === 'asus') {
+        return '/images/laptops/asus.png';
+    }
+
+    // Fallback
+    return '/images/laptops/HP.jpg';
 }
 
 export function getSmartPcImage(itemName: string, index: number): string {

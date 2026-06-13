@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Oswald:wght@500;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1080px;
+      height: 1350px;
+      font-family: 'Cairo', sans-serif;
+      overflow: hidden;
+      background-color: #07080d;
+      position: relative;
+      direction: ltr;
+    }
+
+    /* ── Subtle grid background ── */
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+      background-size: 54px 54px;
+      z-index: 0;
+    }
+
+    /* ── Ambient glow blobs ── */
+    .glow-tl {
+      position: absolute; top: -80px; left: -80px;
+      width: 420px; height: 420px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,100,255,0.15) 0%, transparent 70%);
+      z-index: 0;
+    }
+    .glow-tr {
+      position: absolute; top: -120px; right: -100px;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.14) 0%, transparent 70%);
+      z-index: 0;
+    }
+    .glow-bl {
+      position: absolute; bottom: -100px; left: -80px;
+      width: 380px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,100,255,0.12) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    /* ── Card shell ── */
+    .card {
+      position: relative; z-index: 1;
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+    }
+
+    /* ─────────── HEADER ─────────── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 36px 56px 18px;
+    }
+
+    .logo {
+      font-family: 'Oswald', sans-serif;
+      font-size: 46px; font-weight: 700;
+      letter-spacing: 1px; color: #fff;
+    }
+    .logo .accent { color: #00e5ff; }
+
+    .badge {
+      background: linear-gradient(135deg, #00e5ff 0%, #0077cc 100%);
+      color: #000;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700; font-size: 19px;
+      padding: 8px 26px; border-radius: 100px;
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+
+    /* ─────────── DIVIDER ─────────── */
+    .divider {
+      height: 2px; margin: 0 56px;
+      background: linear-gradient(90deg, transparent, #00e5ff 30%, #0088ff 70%, transparent);
+      box-shadow: 0 0 14px rgba(0, 229, 255, 0.55);
+    }
+
+    /* ─────────── MODEL NAME ─────────── */
+    .model-wrap {
+      text-align: center;
+      padding: 18px 56px 4px;
+    }
+    .model-wrap h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 56px; font-weight: 700;
+      color: #fff; letter-spacing: 2px;
+      text-transform: uppercase; line-height: 1.1;
+      text-shadow: 0 0 40px rgba(0, 229, 255, 0.25);
+    }
+
+    /* ─────────── LAPTOP IMAGE ─────────── */
+    .laptop-area {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 30px;
+      position: relative;
+      min-height: 380px;
+    }
+
+    /* neon floor glow */
+    .glow-floor {
+      position: absolute; bottom: 0px; left: 50%;
+      transform: translateX(-50%);
+      width: 780px; height: 90px;
+      background: radial-gradient(ellipse, rgba(0,229,255,0.28) 0%, transparent 68%);
+      filter: blur(14px);
+      z-index: 0;
+    }
+
+    /* Image wrapper: dark overlay removes white bg visually */
+    .img-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      /* Black background is key: screen blend on black = show image only */
+      background: #07080d;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    /* Edge fade so image blends into card bg seamlessly */
+    .img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right,  #07080d 0%, transparent 8%, transparent 92%, #07080d 100%),
+        linear-gradient(to bottom, #07080d 0%, transparent 6%, transparent 88%, #07080d 100%);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .laptop-area img {
+      max-width: 940px;
+      max-height: 530px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      position: relative; z-index: 1;
+      /* screen on black bg: removes white, keeps laptop */
+      mix-blend-mode: screen;
+      filter:
+        brightness(1.0) contrast(1.05)
+        drop-shadow(0 0 40px rgba(0, 200, 255, 0.45));
+    }
+
+    /* ─────────── SPECS GRID ─────────── */
+    .specs-section {
+      padding: 8px 52px 0;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .spec-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,229,255,0.18);
+      border-left: 3px solid #00e5ff;
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      direction: ltr;
+    }
+
+    .spec-icon {
+      font-size: 30px; flex-shrink: 0;
+      width: 36px; text-align: center;
+    }
+
+    .spec-info { flex: 1; }
+    .spec-label {
+      font-size: 14px; color: #00e5ff;
+      font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; line-height: 1;
+      margin-bottom: 5px;
+      font-family: 'Oswald', sans-serif;
+    }
+    .spec-value {
+      font-size: 26px; color: #fff;
+      font-weight: 700; line-height: 1;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    /* ─────────── PRICE BAR ─────────── */
+    .price-bar {
+      margin: 14px 52px 0;
+      background: linear-gradient(135deg, #063d61, #0077cc 50%, #00b3f0);
+      border-radius: 18px;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      direction: ltr;
+      box-shadow:
+        0 0 36px rgba(0, 180, 255, 0.45),
+        inset 0 1px 0 rgba(255,255,255,0.12);
+    }
+
+    .price-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px; font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 2.5px; text-transform: uppercase;
+    }
+
+    .price-amount {
+      font-family: 'Oswald', sans-serif;
+      font-size: 60px; font-weight: 700;
+      color: #fff; letter-spacing: 1px;
+      text-shadow: 0 0 20px rgba(255,255,255,0.35);
+    }
+    .price-currency {
+      font-size: 28px; font-weight: 500;
+      margin-left: 10px; opacity: 0.9;
+      vertical-align: middle;
+    }
+
+    /* ─────────── FOOTER ─────────── */
+    .footer {
+      padding: 16px 56px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      direction: ltr;
+    }
+
+    .footer-url {
+      font-size: 19px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 1px;
+      font-family: 'Oswald', sans-serif;
+    }
+    .footer-tagline {
+      font-size: 19px;
+      color: rgba(0,229,255,0.55);
+      font-family: 'Cairo', sans-serif;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid"></div>
+  <div class="glow-tl"></div>
+  <div class="glow-tr"></div>
+  <div class="glow-bl"></div>
+
+  <div class="card">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">Hi-<span class="accent">Sense</span></div>
+      <div class="badge">Laptop</div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Model name -->
+    <div class="model-wrap">
+      <h1>{{MODEL}}</h1>
+    </div>
+
+    <!-- Laptop image -->
+    <div class="laptop-area">
+      <div class="glow-floor"></div>
+      <div class="img-wrap">
+        <img src="{{LAPTOP_IMAGE}}" alt="{{MODEL}}" />
+      </div>
+    </div>
+
+    <!-- Specs 2×2 grid -->
+    <div class="specs-section">
+      <div class="specs-grid">
+
+        <div class="spec-card">
+          <div class="spec-icon">⚡</div>
+          <div class="spec-info">
+            <div class="spec-label">Processor</div>
+            <div class="spec-value">{{CPU}}</div>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon">🧠</div>
+          <div class="spec-info">
+            <div class="spec-label">Memory</div>
+            <div class="spec-value">{{RAM}} GB RAM</div>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon">💾</div>
+          <div class="spec-info">
+            <div class="spec-label">Storage</div>
+            <div class="spec-value">{{SSD}} SSD</div>
+          </div>
+        </div>
+
+        <div class="spec-card">
+          <div class="spec-icon">🖥️</div>
+          <div class="spec-info">
+            <div class="spec-label">Display</div>
+            <div class="spec-value">{{DISPLAY}}"</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="price-bar">
+      <div class="price-label">السعر / Price</div>
+      <div class="price-amount">
+        {{PRICE}}<span class="price-currency">EGP</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-url">hi-sense-mg.vercel.app</div>
+      <div class="footer-tagline">🔥 تقنية بلا حدود</div>
+    </div>
+
+  </div>
+</body>
+</html>

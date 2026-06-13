@@ -1,45 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCurrentUser } from '@/app/lib/auth';
-import { replaceProductsByCategories } from '@/app/lib/store';
+import { smartReplaceProductsByCategories } from '@/app/lib/store';
+import { parseSpecs } from '@/app/lib/specs-parser';
 import * as XLSX from 'xlsx';
 import crypto from 'crypto';
 
 // ─── Image pools per brand / category ────────────────────────────────────────
 const LAPTOP_IMAGES: Record<string, string[]> = {
     hp: [
-        '/images/laptops/HP Pro Book 440 G1.jpg',
-        '/images/laptops/HP Pro Book 640 G5.jpg',
-        '/images/laptops/HP Z Book G6.jpg',
-        '/images/laptops/HP Z Book Studio G7.jpg',
-        '/images/laptops/HP AMD Ryzen.jpg',
+        '/images/laptops/HP.jpg',
+        '/images/laptops/HP2.avif',
     ],
     dell: [
-        '/images/laptops/Dell Latitude 5420.jpg',
-        '/images/laptops/Dell Latitude 5400.jpg',
-        '/images/laptops/Dell Latitude 5480.jpg',
-        '/images/laptops/Dell Latitude 5500.jpg',
-        '/images/laptops/Dell Latitude 5501.jpg',
-        '/images/laptops/Dell Latitude 5511.jpg',
-        '/images/laptops/Dell Latitude 5580.jpg',
-        '/images/laptops/Dell Latitude 5590.jpg',
-        '/images/laptops/Dell Latitude 5591.webp',
-        '/images/laptops/Dell Latitude 7400.jpg',
-        '/images/laptops/Dell Latitude 7480.jpg',
-        '/images/laptops/Dell Latitude 3330.jpg',
-        '/images/laptops/Dell 15 Inspiron 7000.jpg',
-        '/images/laptops/Dell G3 Inspiron 3500.jpg',
+        '/images/laptops/Dell.png',
+        '/images/laptops/Dell2.avif',
+        '/images/laptops/Dell3.avif',
     ],
     lenovo: [
-        '/images/laptops/Lenovo ThinkPad T495.jpg',
-        '/images/laptops/Dell Latitude 5420.jpg',
-        '/images/laptops/HP Pro Book 640 G5.jpg',
+        '/images/laptops/Lenovo.avif',
+        '/images/laptops/Lenovo2.avif',
+        '/images/laptops/thinkpad.jpg',
+        '/images/laptops/thinkpad2.jpg',
+        '/images/laptops/lenovoLOQ.jpg',
+    ],
+    asus: [
+        '/images/laptops/asus.png',
     ],
     default: [
-        '/images/laptops/Dell Latitude 5420.jpg',
-        '/images/laptops/HP Pro Book 640 G5.jpg',
-        '/images/laptops/Lenovo ThinkPad T495.jpg',
-        '/images/laptops/HP Z Book G6.jpg',
-        '/images/laptops/Dell Latitude 7400.jpg',
+        '/images/laptops/HP.jpg',
     ],
 };
 
@@ -66,22 +54,50 @@ const PC_IMAGES: Record<string, string[]> = {
     default:    ['/images/pc/H.S 128 GB.jpg', '/images/pc/Caddy Fat.jpg', '/images/pc/Caddy Slim.jpg', '/images/pc/Rack USB 3.0.jpg'],
 };
 
-export function pickLaptopImage(brand: string, model: string, index: number): string {
-    const key = brand.toLowerCase().trim();
-    const pool = LAPTOP_IMAGES[key] || LAPTOP_IMAGES.default;
-    
-    // Try to match model keywords to keep them realistic
-    const lowerModel = model.toLowerCase();
-    for (const img of pool) {
-        const filename = img.split('/').pop()?.toLowerCase() || '';
-        if (lowerModel.includes('latitude') && filename.includes('latitude')) return img;
-        if (lowerModel.includes('inspiron') && filename.includes('inspiron')) return img;
-        if (lowerModel.includes('thinkpad') && filename.includes('thinkpad')) return img;
-        if (lowerModel.includes('probook') && filename.includes('pro book')) return img;
-        if (lowerModel.includes('zbook') && filename.includes('z book')) return img;
+export function pickLaptopImage(brand: string, model: string, price: number): string {
+    const modelLower = model.toLowerCase();
+    const brandLower = brand.toLowerCase();
+    const combined = `${brandLower} ${modelLower}`.toLowerCase();
+
+    // ThinkPad
+    if (combined.includes('thinkpad')) {
+        return combined.includes('x1') || combined.includes('x13') || combined.includes('t14')
+            ? '/images/laptops/thinkpad2.jpg'
+            : '/images/laptops/thinkpad.jpg';
     }
-    
-    return pool[index % pool.length];
+
+    // Lenovo LOQ / gaming
+    if (combined.includes('loq') || combined.includes('legion') || combined.includes('ideapad gaming')) {
+        return '/images/laptops/lenovoLOQ.jpg';
+    }
+
+    // Generic Lenovo
+    if (combined.includes('lenovo') || brandLower === 'lenovo') {
+        return (price % 2 === 0)
+            ? '/images/laptops/Lenovo.avif'
+            : '/images/laptops/Lenovo2.avif';
+    }
+
+    // HP
+    if (combined.includes(' hp') || brandLower === 'hp' || combined.startsWith('hp')) {
+        return (price % 2 === 0)
+            ? '/images/laptops/HP.jpg'
+            : '/images/laptops/HP2.avif';
+    }
+
+    // Dell
+    if (combined.includes('dell') || brandLower === 'dell') {
+        const idx = Math.abs(model.charCodeAt(0)) % 3;
+        return ['/images/laptops/Dell.png', '/images/laptops/Dell2.avif', '/images/laptops/Dell3.avif'][idx];
+    }
+
+    // ASUS
+    if (combined.includes('asus') || brandLower === 'asus') {
+        return '/images/laptops/asus.png';
+    }
+
+    // Fallback
+    return '/images/laptops/HP.jpg';
 }
 
 export function pickPcImage(itemName: string, index: number): string {
@@ -115,7 +131,11 @@ export async function POST(req: NextRequest) {
         const buffer = Buffer.from(arrayBuffer);
         const workbook = XLSX.read(buffer, { type: 'buffer' });
 
-        const newProducts: { id: string; category: string; brand: string; model: string; specs: string; price: number; section?: string; image?: string }[] = [];
+        const newProducts: {
+            id: string; category: string; brand: string; model: string;
+            specs: string; price: number; section?: string; image?: string;
+            cpu?: string; ram?: string; ssd?: string; display?: string;
+        }[] = [];
 
         let laptopsAdded = 0;
         let pcsAdded = 0;
@@ -170,8 +190,9 @@ export async function POST(req: NextRequest) {
                             }
                         }
 
-                        const image = pickLaptopImage(brand, modelName, laptopsAdded);
+                        const image = pickLaptopImage(brand, modelName, priceVal);
                         const newId = crypto.randomUUID();
+                        const parsed = parseSpecs(specs, modelName);
 
                         newProducts.push({
                             id: newId,
@@ -182,6 +203,10 @@ export async function POST(req: NextRequest) {
                             price: priceVal,
                             section: currentSection,
                             image,
+                            cpu: parsed.cpu || undefined,
+                            ram: parsed.ram || undefined,
+                            ssd: parsed.ssd || undefined,
+                            display: parsed.display || undefined,
                         });
                         laptopsAdded++;
                     }
@@ -232,7 +257,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ error: 'No valid products found in Excel file.' }, { status: 400 });
         }
 
-        await replaceProductsByCategories(categoriesToReplace, newProducts);
+        const comparison = await smartReplaceProductsByCategories(categoriesToReplace, newProducts);
         console.log(`Imported ${newProducts.length} products for categories: ${categoriesToReplace.join(', ')}.`);
 
         return NextResponse.json({
@@ -242,6 +267,11 @@ export async function POST(req: NextRequest) {
                 pcsAdded,
                 totalAdded: laptopsAdded + pcsAdded,
                 categoriesReplaced: categoriesToReplace,
+                comparison: {
+                    new: comparison.new,
+                    deleted: comparison.deleted,
+                    unchanged: comparison.unchanged,
+                },
             },
         });
     } catch (error) {

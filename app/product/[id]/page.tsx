@@ -17,7 +17,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
 
     // Fallback image based on category
     const fallbackImage = product.category === 'Laptop'
-        ? '/images/laptops/Dell Latitude 5420.jpg'
+        ? '/images/laptops/HP.jpg'
         : '/images/pc/ram 8GB Crucial PC Used DDR4 2400.jpg';
 
     const imageSrc = product.image || fallbackImage;

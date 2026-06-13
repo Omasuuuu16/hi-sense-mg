@@ -48,7 +48,12 @@ export interface StoreProduct {
     price: number;
     section?: string | null;
     image?: string | null;
+    cpu?: string | null;
+    ram?: string | null;
+    ssd?: string | null;
+    display?: string | null;
     created_at?: string;
+    updated_at?: string | null;
 }
 
 async function ensureInitialized() {

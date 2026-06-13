@@ -6,7 +6,8 @@ import { useRouter } from 'next/navigation';
 import {
     Upload, FileSpreadsheet, Database, Laptop, Cpu,
     CheckCircle2, AlertTriangle, RefreshCw, Plus,
-    TrendingUp, Package, LayoutDashboard, ArrowUpRight
+    TrendingUp, Package, LayoutDashboard, ArrowUpRight,
+    FolderOpen, ImageIcon, Minus, Equal, FileText
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AddDeviceModal from '../components/AddDeviceModal';
@@ -22,6 +23,8 @@ export default function AdminPage() {
     const [resultSummary, setResultSummary] = useState<any | null>(null);
     const [showAddModal,  setShowAddModal]  = useState(false);
     const [dragging,      setDragging]      = useState(false);
+    const [generating,    setGenerating]    = useState(false);
+    const [generateResult, setGenerateResult] = useState<any | null>(null);
     const [toast, setToast] = useState({ visible: false, message: '', type: 'success' as 'success' | 'error' });
 
     const showToast = (message: string, type: 'success' | 'error') =>
@@ -55,7 +58,7 @@ export default function AdminPage() {
         e.preventDefault();
         setDragging(false);
         const f = e.dataTransfer.files[0];
-        if (f && (f.name.endsWith('.xlsx') || f.name.endsWith('.xls'))) handleFileChange(f);
+        if (f && (f.name.endsWith('.xlsx') || f.name.endsWith('.xls') || f.name.endsWith('.csv'))) handleFileChange(f);
     };
 
     const handleUpload = async (e: React.FormEvent) => {
@@ -80,6 +83,35 @@ export default function AdminPage() {
             showToast('Network error. Please try again.', 'error');
         } finally {
             setUploading(false);
+        }
+    };
+
+    const handleGeneratePost = async () => {
+        setGenerating(true);
+        setGenerateResult(null);
+        try {
+            const body: { categories?: string[] } = {};
+            if (resultSummary && resultSummary.categoriesReplaced) {
+                body.categories = resultSummary.categoriesReplaced;
+            }
+            const res = await fetch('/api/admin/generate-post', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            });
+            const data = await res.json();
+            if (res.ok && data.success) {
+                setGenerateResult(data);
+                showToast(`✅ Generated ${data.totalImages} images in Post generation folder!`, 'success');
+            } else {
+                showToast(data.error || 'Failed to generate post.', 'error');
+            }
+        } catch {
+            showToast('Network error during post generation.', 'error');
+        } finally {
+            setGenerating(false);
         }
     };
 
@@ -173,7 +205,7 @@ export default function AdminPage() {
                                 <FileSpreadsheet className="w-5 h-5 text-blue-600" />
                             </div>
                             <div>
-                                <h2 className="text-lg font-black text-slate-800">Update Catalog via Excel</h2>
+                                <h2 className="text-lg font-black text-slate-800">Update Catalog via Excel / CSV</h2>
                                 <p className="text-xs text-slate-400">Only the categories in your file will be replaced</p>
                             </div>
                         </div>
@@ -200,7 +232,7 @@ export default function AdminPage() {
                             >
                                 <input
                                     type="file"
-                                    accept=".xlsx,.xls"
+                                    accept=".xlsx,.xls,.csv"
                                     onChange={e => e.target.files?.[0] && handleFileChange(e.target.files[0])}
                                     className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                                 />
@@ -228,13 +260,15 @@ export default function AdminPage() {
                                                 <Upload className="w-6 h-6 text-blue-600" />
                                             </div>
                                             <div>
-                                                <p className="font-bold text-slate-700 text-sm">Drop Excel file here</p>
-                                                <p className="text-xs text-slate-400 mt-0.5">or click to browse · .xlsx / .xls</p>
+                                                <p className="font-bold text-slate-700 text-sm">Drop Excel or CSV file here</p>
+                                                <p className="text-xs text-slate-400 mt-0.5">or click to browse · .xlsx / .xls / .csv</p>
                                             </div>
                                         </>
                                     )}
                                 </div>
                             </div>
+
+
 
                             <button
                                 type="submit"
@@ -265,7 +299,7 @@ export default function AdminPage() {
                         </div>
 
                         {!resultSummary ? (
-                            <div className="flex-1 flex flex-col items-center justify-center text-center py-8 space-y-3">
+                            <div className="flex-1 flex flex-col items-center justify-center text-center py-6 space-y-3">
                                 <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center">
                                     <Package className="w-8 h-8 text-slate-300" />
                                 </div>
@@ -297,8 +331,92 @@ export default function AdminPage() {
                                         <p className="text-xs font-semibold text-slate-400 mt-0.5">PC Parts</p>
                                     </div>
                                 </div>
+
+                                {resultSummary.comparison && (
+                                    <div className="space-y-2">
+                                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Comparison</p>
+                                        {resultSummary.comparison.new?.length > 0 && (
+                                            <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                                                <p className="text-xs font-bold text-emerald-700 flex items-center gap-1.5 mb-1.5">
+                                                    <Plus className="w-3.5 h-3.5" /> New ({resultSummary.comparison.new.length})
+                                                </p>
+                                                {resultSummary.comparison.new.map((m: string) => (
+                                                    <p key={m} className="text-xs text-emerald-600 truncate">• {m}</p>
+                                                ))}
+                                            </div>
+                                        )}
+                                        {resultSummary.comparison.deleted?.length > 0 && (
+                                            <div className="p-3 rounded-xl bg-red-50 border border-red-200">
+                                                <p className="text-xs font-bold text-red-700 flex items-center gap-1.5 mb-1.5">
+                                                    <Minus className="w-3.5 h-3.5" /> Deleted ({resultSummary.comparison.deleted.length})
+                                                </p>
+                                                {resultSummary.comparison.deleted.map((m: string) => (
+                                                    <p key={m} className="text-xs text-red-600 truncate">• {m}</p>
+                                                ))}
+                                            </div>
+                                        )}
+                                        {resultSummary.comparison.unchanged?.length > 0 && (
+                                            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
+                                                <p className="text-xs font-bold text-slate-600 flex items-center gap-1.5 mb-1.5">
+                                                    <Equal className="w-3.5 h-3.5" /> Unchanged ({resultSummary.comparison.unchanged.length})
+                                                </p>
+                                                <p className="text-xs text-slate-500">{resultSummary.comparison.unchanged.length} devices kept</p>
+                                            </div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         )}
+
+                        {/* ── Generate Post Button (always visible) ── */}
+                        <div className="mt-4">
+                            <button
+                                onClick={handleGeneratePost}
+                                disabled={generating}
+                                className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-bold text-sm shadow-[0_4px_16px_rgba(99,102,241,0.3)] hover:shadow-[0_6px_24px_rgba(99,102,241,0.4)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 disabled:opacity-40 disabled:pointer-events-none"
+                            >
+                                {generating ? (
+                                    <><span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Generating Images...</>
+                                ) : (
+                                    <><ImageIcon className="w-4 h-4" /> Generate Post</>
+                                )}
+                            </button>
+                        </div>
+
+                        {generateResult && (
+                            <div className="mt-3 p-4 rounded-xl bg-gradient-to-br from-indigo-50 to-cyan-50 border border-indigo-200 space-y-2">
+                                <p className="text-xs font-bold text-indigo-700 flex items-center gap-1.5">
+                                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                    Post Generated Successfully!
+                                </p>
+                                <div className="flex gap-2">
+                                    <div className="flex-1 p-2 rounded-lg bg-white border border-indigo-100 text-center">
+                                        <p className="text-lg font-black text-indigo-600">{generateResult.laptopsGenerated}</p>
+                                        <p className="text-xs text-slate-400">Laptop PNGs</p>
+                                    </div>
+                                    <div className="flex-1 p-2 rounded-lg bg-white border border-cyan-100 text-center">
+                                        <p className="text-lg font-black text-cyan-600">{generateResult.pcsGenerated}</p>
+                                        <p className="text-xs text-slate-400">PC PNGs</p>
+                                    </div>
+                                </div>
+                                <div className="p-2 rounded-lg bg-white/80 border border-slate-100 flex items-start gap-2">
+                                    <FolderOpen className="w-3.5 h-3.5 text-amber-500 mt-0.5 flex-shrink-0" />
+                                    <p className="text-[11px] text-slate-500 break-all font-mono leading-relaxed">
+                                        {generateResult.folderPath}
+                                    </p>
+                                </div>
+                                <div className="p-2 rounded-lg bg-white/80 border border-slate-100 flex items-start gap-2">
+                                    <FileText className="w-3.5 h-3.5 text-green-500 mt-0.5 flex-shrink-0" />
+                                    <p className="text-[11px] text-slate-500 font-mono">post.txt saved</p>
+                                </div>
+                                {generateResult.errors?.length > 0 && (
+                                    <p className="text-[10px] text-amber-600">
+                                        ⚠ {generateResult.errors.length} item(s) skipped
+                                    </p>
+                                )}
+                            </div>
+                        )}
+
 
                         {/* Quick links */}
                         <div className="mt-6 pt-4 border-t border-blue-50 space-y-2">

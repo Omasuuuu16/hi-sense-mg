@@ -14,6 +14,7 @@ import {
     type StoreProduct,
     type StoreUser,
 } from './redis-store';
+import { compareProducts, type ImportComparison } from './product-compare';
 
 export type { StoreProduct as Product, StoreUser as User };
 
@@ -58,8 +59,8 @@ export async function insertProduct(product: StoreProduct) {
     if (useRedisStore()) return redisInsertProduct(product);
 
     await dbQuery(
-        'INSERT INTO products (id, category, brand, model, specs, price, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [product.id, product.category, product.brand, product.model, product.specs, product.price, product.section ?? null, product.image ?? null]
+        'INSERT INTO products (id, category, brand, model, specs, price, section, image, cpu, ram, ssd, display) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [product.id, product.category, product.brand, product.model, product.specs, product.price, product.section ?? null, product.image ?? null, product.cpu ?? null, product.ram ?? null, product.ssd ?? null, product.display ?? null]
     );
 }
 
@@ -94,10 +95,43 @@ export async function bulkInsertProducts(items: StoreProduct[]) {
 
     for (const prod of items) {
         await dbQuery(
-            'INSERT INTO products (id, category, brand, model, specs, price, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [prod.id, prod.category, prod.brand, prod.model, prod.specs, prod.price, prod.section ?? null, prod.image ?? null]
+            'INSERT INTO products (id, category, brand, model, specs, price, section, image, cpu, ram, ssd, display) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [prod.id, prod.category, prod.brand, prod.model, prod.specs, prod.price, prod.section ?? null, prod.image ?? null, prod.cpu ?? null, prod.ram ?? null, prod.ssd ?? null, prod.display ?? null]
         );
     }
+}
+
+/** Smart replace with comparison: preserves IDs for unchanged products. */
+export async function smartReplaceProductsByCategories(
+    categories: string[],
+    items: StoreProduct[]
+): Promise<ImportComparison> {
+    const existing = await getProducts();
+    const comparison = compareProducts(existing, items, categories);
+    const now = new Date().toISOString();
+
+    const categoryItems = [
+        ...comparison.unchangedProducts,
+        ...comparison.newProducts.map(p => ({ ...p, updated_at: now })),
+    ];
+
+    if (useRedisStore()) {
+        await redisReplaceProductsByCategories(categories, categoryItems);
+    } else {
+        const normalized = categories.map(c => c.toLowerCase());
+        if (normalized.length > 0) {
+            const placeholders = normalized.map(() => '?').join(', ');
+            await dbQuery(`DELETE FROM products WHERE LOWER(category) IN (${placeholders})`, normalized);
+        }
+        for (const prod of categoryItems) {
+            await dbQuery(
+                'INSERT INTO products (id, category, brand, model, specs, price, section, image, cpu, ram, ssd, display, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [prod.id, prod.category, prod.brand, prod.model, prod.specs, prod.price, prod.section ?? null, prod.image ?? null, prod.cpu ?? null, prod.ram ?? null, prod.ssd ?? null, prod.display ?? null, prod.updated_at ?? now]
+            );
+        }
+    }
+
+    return comparison;
 }
 
 /** Replace products only in the given categories; other categories are left untouched. */
@@ -112,8 +146,8 @@ export async function replaceProductsByCategories(categories: string[], items: S
 
     for (const prod of items) {
         await dbQuery(
-            'INSERT INTO products (id, category, brand, model, specs, price, section, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [prod.id, prod.category, prod.brand, prod.model, prod.specs, prod.price, prod.section ?? null, prod.image ?? null]
+            'INSERT INTO products (id, category, brand, model, specs, price, section, image, cpu, ram, ssd, display) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [prod.id, prod.category, prod.brand, prod.model, prod.specs, prod.price, prod.section ?? null, prod.image ?? null, prod.cpu ?? null, prod.ram ?? null, prod.ssd ?? null, prod.display ?? null]
         );
     }
 }
