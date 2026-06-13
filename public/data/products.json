@@ -605,7 +605,7 @@
     "model": "Dell Optiplex 3020 i3-4th,4GB,500GB T",
     "specs": "Dell Optiplex 3020 i3-4th,4GB,500GB T",
     "price": 2500,
-    "image": "/images/pc/Dell Optiplex 3020 i3-4th,4GB,500GB T.jpg"
+    "image": "/images/pc/HP_EliteDesk.jpg"
   },
   {
     "id": "9937e0c7-6300-4ad3-9e74-b1d283f7d9a5",
@@ -623,7 +623,7 @@
     "model": "HP AMD A6 ,4,250 D VGA2GB",
     "specs": "HP AMD A6 ,4,250 D VGA2GB",
     "price": 2100,
-    "image": "/images/pc/Adaptor Acer.jpg"
+    "image": "/images/pc/HP_EliteDesk.jpg"
   },
   {
     "id": "6b34f3e5-99b3-4e65-beed-495c511579b4",
@@ -632,7 +632,7 @@
     "model": "Used core i3 ,4,500 D HP 4TH",
     "specs": "Used core i3 ,4,500 D HP 4TH",
     "price": 2750,
-    "image": "/images/pc/Adaptor Acer.jpg"
+    "image": "/images/pc/HP_EliteDesk.jpg"
   },
   {
     "id": "ee675e56-4254-46cd-9a2a-62869961a5c8",
@@ -650,7 +650,7 @@
     "model": "Used core i5 ,4,500 D HP 4TH",
     "specs": "Used core i5 ,4,500 D HP 4TH",
     "price": 3000,
-    "image": "/images/pc/Adaptor Acer.jpg"
+    "image": "/images/pc/HP_EliteDesk.jpg"
   },
   {
     "id": "a905d31d-1f26-429b-99fd-40502895ccca",
@@ -668,7 +668,7 @@
     "model": "Dell Optiplex 3020 i5-4th,8GB,500GB T",
     "specs": "Dell Optiplex 3020 i5-4th,8GB,500GB T",
     "price": 3500,
-    "image": "/images/pc/Dell Optiplex 3020 i5-4th,8GB,500GB T.jpg"
+    "image": "/images/pc/HP_EliteDesk.jpg"
   },
   {
     "id": "dc3e2ec6-d005-406e-9243-60498433d52d",
@@ -686,7 +686,7 @@
     "model": "Used core i7-9th,500,8GB HP T 600 G5",
     "specs": "Used core i7-9th,500,8GB HP T 600 G5",
     "price": 13500,
-    "image": "/images/pc/Adaptor Acer.jpg"
+    "image": "/images/pc/HP_EliteDesk.jpg"
   },
   {
     "id": "869a2587-155e-4f77-bc90-d13a29d7b9e8",

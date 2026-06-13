@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, Phone, Check, Shield } from 'lucide-react';
+import { getSmartLaptopImage, getSmartPcImage, getStringHash } from '@/app/lib/image-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,12 +16,21 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
         notFound();
     }
 
+    // Resolve dynamic smart image based on model & brand if it's not a full external HTTP link
+    let finalImage = product.image;
+    if (!finalImage || !finalImage.startsWith('http')) {
+        const hash = getStringHash(product.model + '-' + product.id);
+        finalImage = product.category === 'Laptop'
+            ? getSmartLaptopImage(product.brand, product.model, hash)
+            : getSmartPcImage(product.model, hash);
+    }
+
     // Fallback image based on category
     const fallbackImage = product.category === 'Laptop'
         ? '/images/laptops/HP.jpg'
         : '/images/pc/ram 8GB Crucial PC Used DDR4 2400.jpg';
 
-    const imageSrc = product.image || fallbackImage;
+    const imageSrc = finalImage || fallbackImage;
 
     return (
         <div className="min-h-screen pt-24 pb-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

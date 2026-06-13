@@ -48,8 +48,8 @@ const PC_IMAGES: Record<string, string[]> = {
     adaptor:    ['/images/pc/Adaptor HP.jpg', '/images/pc/Adaptor Dell.jpg', '/images/pc/Adaptor Lenovo.jpg', '/images/pc/Adaptor Acer.jpg', '/images/pc/Adaptor Asus.jpg', '/images/pc/Adaptor Samsung.jpg', '/images/pc/Adaptor Toshiba.jpg'],
     cable:      ['/images/pc/Cable DP Original.jpg', '/images/pc/Cable HDMI 1.5M.jpg', '/images/pc/Cable DP to HDMI.jpg', '/images/pc/Cable DP to VGA.jpg', '/images/pc/Cable DVI.jpg'],
     flash:      ['/images/pc/FLASH 32GB KINGSTON G4.jpg', '/images/pc/FLASH 64GB KINGSTON G4.jpg', '/images/pc/Lexar 128 GB.jpg', '/images/pc/Lexar 240 GB.jpg'],
-    desktop:    ['/images/pc/Dell Optiplex 3020 i3-4th,4GB,500GB T.jpg', '/images/pc/Dell Optiplex 3020 i5-4th,8GB,500GB T.jpg'],
-    core:       ['/images/pc/Used core i5 ,8,500 D HP 4TH.jpg', '/images/pc/Used core i5 ,8,500 T HP 4TH.jpg', '/images/pc/Used core i7 ,8,500 T,4TH.jpg'],
+    desktop:    ['/images/pc/HP_EliteDesk.jpg'],
+    core:       ['/images/pc/HP_EliteDesk.jpg'],
     cooler:     ['/images/pc/Cooler Fan Laptop FN01.jpg', '/images/pc/Cooler Fan Laptop Giga max.jpg'],
     default:    ['/images/pc/H.S 128 GB.jpg', '/images/pc/Caddy Fat.jpg', '/images/pc/Caddy Slim.jpg', '/images/pc/Rack USB 3.0.jpg'],
 };
