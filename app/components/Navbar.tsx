@@ -7,6 +7,15 @@ import { Menu, X, LogOut, Shield, Laptop, Cpu, Home, Phone } from 'lucide-react'
 import { useAuth } from '../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const FB_URL = 'https://www.facebook.com/profile.php?id=61565876215208';
+
+// Facebook SVG icon (not in Lucide)
+const FacebookIcon = ({ className }: { className?: string }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </svg>
+);
+
 const navLinks = [
     { href: '/', label: 'Home', icon: Home },
     { href: '/laptops', label: 'Laptops', icon: Laptop },
@@ -91,6 +100,18 @@ export default function Navbar() {
 
                     {/* Right Actions */}
                     <div className="flex items-center gap-3">
+
+                        {/* Facebook — desktop */}
+                        <a
+                            href={FB_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold text-[#1877F2] hover:bg-blue-50 transition-all"
+                            title="Visit our Facebook page"
+                        >
+                            <FacebookIcon className="w-4 h-4" />
+                            Facebook
+                        </a>
                         {/* Auth UI */}
                         {user ? (
                             <div className="hidden md:flex items-center gap-4">
@@ -152,6 +173,18 @@ export default function Navbar() {
                                     {label}
                                 </Link>
                             ))}
+
+                            {/* Facebook — mobile */}
+                            <a
+                                href={FB_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => setIsMenuOpen(false)}
+                                className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-[#1877F2] hover:bg-blue-50 transition-colors"
+                            >
+                                <FacebookIcon className="w-4 h-4" />
+                                Visit our Facebook page
+                            </a>
 
                             {isAdmin && (
                                 <Link href="/admin" onClick={() => setIsMenuOpen(false)}
