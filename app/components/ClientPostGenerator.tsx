@@ -111,6 +111,7 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                     }
                 };
 
+                let fontsLoaded = false;
                 const generateNode = async (htmlStr: string, filename: string) => {
                     if (!iframeRef.current || !iframeRef.current.contentDocument) return;
                     
@@ -121,8 +122,9 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                     
                     await waitForImages(doc.body);
                     
-                    // Delay for fonts to load inside the iframe
-                    await new Promise(r => setTimeout(r, 800));
+                    // First render: wait 800ms for fonts to load. Subsequent renders: fonts are cached, 150ms is enough.
+                    await new Promise(r => setTimeout(r, fontsLoaded ? 150 : 800));
+                    fontsLoaded = true;
 
                     const dataUrl = await toPng(doc.body, {
                         quality: 1,
@@ -144,49 +146,60 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                 };
 
                 const origin = window.location.origin;
+                let skipped = 0;
 
                 for (let i = 0; i < laptops.length; i++) {
                     const product = laptops[i];
                     props.onProgress(`Generating Laptop ${i + 1}/${laptops.length}: ${product.model}...`);
                     
-                    const parsed = parseSpecs(product.specs, product.model);
-                    const cpu = parsed.cpu || product.cpu || '—';
-                    const ram = (parsed.ram || product.ram || '—').replace(/GB/i, '');
-                    const ssd = (parsed.ssd || product.ssd || '—').replace(/GB|TB/i, m => m.toLowerCase());
-                    const display = parsed.display || product.display || '—';
+                    try {
+                        const parsed = parseSpecs(product.specs, product.model);
+                        const cpu = parsed.cpu || product.cpu || '—';
+                        const ram = (parsed.ram || product.ram || '—').replace(/GB/i, '');
+                        const ssd = (parsed.ssd || product.ssd || '—').replace(/GB|TB/i, m => m.toLowerCase());
+                        const display = parsed.display || product.display || '—';
 
-                    // Use smart image picker so we always get a valid image regardless of DB value
-                    const hash = getStringHash(product.model + '-' + (product.id || String(i)));
-                    const laptopImg = origin + getSmartLaptopImage(product.brand || 'HP', product.model, hash);
+                        // Use smart image picker so we always get a valid image regardless of DB value
+                        const hash = getStringHash(product.model + '-' + (product.id || String(i)));
+                        const laptopImg = origin + getSmartLaptopImage(product.brand || 'HP', product.model, hash);
 
-                    let html = laptopTemplate
-                        .replace(/\{\{MODEL\}\}/g, product.model.toUpperCase())
-                        .replace(/\{\{CPU\}\}/g, cpu)
-                        .replace(/\{\{RAM\}\}/g, ram)
-                        .replace(/\{\{SSD\}\}/g, ssd)
-                        .replace(/\{\{DISPLAY\}\}/g, display)
-                        .replace(/\{\{PRICE\}\}/g, product.price.toLocaleString('en-US'))
-                        .replace(/\{\{LAPTOP_IMAGE\}\}/g, laptopImg);
+                        let html = laptopTemplate
+                            .replace(/\{\{MODEL\}\}/g, product.model.toUpperCase())
+                            .replace(/\{\{CPU\}\}/g, cpu)
+                            .replace(/\{\{RAM\}\}/g, ram)
+                            .replace(/\{\{SSD\}\}/g, ssd)
+                            .replace(/\{\{DISPLAY\}\}/g, display)
+                            .replace(/\{\{PRICE\}\}/g, product.price.toLocaleString('en-US'))
+                            .replace(/\{\{LAPTOP_IMAGE\}\}/g, laptopImg);
 
-                    const slug = modelToSlug(product.model);
-                    await generateNode(html, `laptop_${slug}.png`);
+                        const slug = modelToSlug(product.model);
+                        await generateNode(html, `laptop_${slug}.png`);
+                    } catch (itemErr) {
+                        console.warn(`Skipping laptop "${product.model}":`, itemErr);
+                        skipped++;
+                    }
                 }
 
                 for (let i = 0; i < pcs.length; i++) {
                     const product = pcs[i];
                     props.onProgress(`Generating PC Part ${i + 1}/${pcs.length}: ${product.model}...`);
 
-                    const pcHash = getStringHash(product.model + '-' + (product.id || String(i)));
-                    const pcImg = origin + getSmartPcImage(product.model, pcHash);
-                    
-                    let html = pcTemplate
-                        .replace(/\{\{MODEL\}\}/g, product.model.toUpperCase())
-                        .replace(/\{\{SPECS\}\}/g, product.specs || product.model)
-                        .replace(/\{\{PRICE\}\}/g, product.price.toLocaleString('en-US'))
-                        .replace(/\{\{PC_IMAGE\}\}/g, pcImg);
+                    try {
+                        const pcHash = getStringHash(product.model + '-' + (product.id || String(i)));
+                        const pcImg = origin + getSmartPcImage(product.model, pcHash);
+                        
+                        let html = pcTemplate
+                            .replace(/\{\{MODEL\}\}/g, product.model.toUpperCase())
+                            .replace(/\{\{SPECS\}\}/g, product.specs || product.model)
+                            .replace(/\{\{PRICE\}\}/g, product.price.toLocaleString('en-US'))
+                            .replace(/\{\{PC_IMAGE\}\}/g, pcImg);
 
-                    const slug = modelToSlug(product.model);
-                    await generateNode(html, `pc_${slug}.png`);
+                        const slug = modelToSlug(product.model);
+                        await generateNode(html, `pc_${slug}.png`);
+                    } catch (itemErr) {
+                        console.warn(`Skipping PC part "${product.model}":`, itemErr);
+                        skipped++;
+                    }
                 }
 
                 props.onProgress('Saving text file...');
