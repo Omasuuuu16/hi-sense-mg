@@ -12,6 +12,8 @@ import {
 import { motion } from 'framer-motion';
 import AddDeviceModal from '../components/AddDeviceModal';
 import Toast from '../components/Toast';
+import { ClientPostGenerator, ClientPostGeneratorRef } from '../components/ClientPostGenerator';
+import { generateCatalogPostText } from '../lib/post-text';
 
 export default function AdminPage() {
     const { user, isAdmin, loading } = useAuth();
@@ -25,6 +27,8 @@ export default function AdminPage() {
     const [dragging,      setDragging]      = useState(false);
     const [generating,    setGenerating]    = useState(false);
     const [generateResult, setGenerateResult] = useState<any | null>(null);
+    const [progressMsg,   setProgressMsg]   = useState('');
+    const generatorRef = React.useRef<ClientPostGeneratorRef>(null);
     const [toast, setToast] = useState({ visible: false, message: '', type: 'success' as 'success' | 'error' });
 
     const showToast = (message: string, type: 'success' | 'error') =>
@@ -89,29 +93,44 @@ export default function AdminPage() {
     const handleGeneratePost = async () => {
         setGenerating(true);
         setGenerateResult(null);
+        setProgressMsg('Starting generation...');
         try {
             const body: { categories?: string[] } = {};
             if (resultSummary && resultSummary.categoriesReplaced) {
                 body.categories = resultSummary.categoriesReplaced;
             }
-            const res = await fetch('/api/admin/generate-post', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-            });
-            const data = await res.json();
-            if (res.ok && data.success) {
-                setGenerateResult(data);
-                showToast(`✅ Generated ${data.totalImages} images in Post generation folder!`, 'success');
-            } else {
-                showToast(data.error || 'Failed to generate post.', 'error');
+            
+            // Fetch products
+            const res = await fetch('/api/products');
+            if (!res.ok) throw new Error('Failed to fetch products');
+            const allProducts = await res.json();
+            
+            // Filter products
+            let textProducts = allProducts;
+            if (body.categories && body.categories.length > 0) {
+                const lowerCats = new Set(body.categories.map(c => c.toLowerCase()));
+                textProducts = allProducts.filter((p: any) => lowerCats.has(p.category.toLowerCase()));
             }
-        } catch {
-            showToast('Network error during post generation.', 'error');
+
+            // Build post text
+            const postText = generateCatalogPostText(textProducts);
+
+            // Execute client generator
+            await generatorRef.current?.generatePost(allProducts, body.categories, postText);
+
+            setGenerateResult({
+                laptopsGenerated: textProducts.filter((p: any) => p.category.toLowerCase() === 'laptop').length,
+                pcsGenerated: textProducts.filter((p: any) => p.category.toLowerCase() === 'pc').length,
+                folderPath: 'Saved to your selected folder (or ZIP)',
+                errors: []
+            });
+            showToast(`✅ Generated images and saved successfully!`, 'success');
+        } catch (err: any) {
+            console.error('Network error during post generation:', err);
+            showToast(err.message || 'Error during post generation.', 'error');
         } finally {
             setGenerating(false);
+            setProgressMsg('');
         }
     };
 
@@ -376,7 +395,7 @@ export default function AdminPage() {
                                 className="w-full py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-bold text-sm shadow-[0_4px_16px_rgba(99,102,241,0.3)] hover:shadow-[0_6px_24px_rgba(99,102,241,0.4)] hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 disabled:opacity-40 disabled:pointer-events-none"
                             >
                                 {generating ? (
-                                    <><span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Generating Images...</>
+                                    <><span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" /> {progressMsg || 'Generating...'}</>
                                 ) : (
                                     <><ImageIcon className="w-4 h-4" /> Generate Post</>
                                 )}
@@ -436,6 +455,8 @@ export default function AdminPage() {
                     </motion.div>
                 </div>
             </div>
+
+            <ClientPostGenerator ref={generatorRef} onProgress={setProgressMsg} />
 
             <AddDeviceModal
                 isOpen={showAddModal}
