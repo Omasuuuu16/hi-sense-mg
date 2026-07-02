@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -9,6 +10,7 @@ import { Lock, Mail, ArrowRight, AlertCircle, Laptop } from 'lucide-react';
 
 export default function LoginPage() {
     const { login, user, loading } = useAuth();
+    const { t } = useLanguage();
     const router = useRouter();
 
     const [email, setEmail]       = useState('');
@@ -85,8 +87,8 @@ export default function LoginPage() {
                     className="bg-white rounded-3xl border border-blue-100 shadow-[0_8px_48px_rgba(37,99,235,0.12)] p-8"
                 >
                     <div className="mb-8">
-                        <h1 className="text-3xl font-black text-slate-800 mb-2">Welcome back</h1>
-                        <p className="text-slate-400 text-sm">Sign in to your Hi-sense account</p>
+                        <h1 className="text-3xl font-black text-slate-800 mb-2">{t('welcomeBack')}</h1>
+                        <p className="text-slate-400 text-sm">{t('signInDesc')}</p>
                     </div>
 
                     {/* General Error */}
@@ -160,16 +162,16 @@ export default function LoginPage() {
                                 <span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                             ) : (
                                 <>
-                                    Sign In
+                                    {t('signIn')}
                                     <ArrowRight className="w-4 h-4" />
                                 </>
                             )}
                         </button>
 
                         <p className="text-center text-sm text-slate-400">
-                            Don't have an account?{' '}
+                            {t('dontHaveAccount')}{' '}
                             <Link href="/register" className="text-blue-600 font-bold hover:underline">
-                                Create one
+                                {t('createOne')}
                             </Link>
                         </p>
                     </form>
@@ -182,7 +184,7 @@ export default function LoginPage() {
                     transition={{ delay: 0.5 }}
                     className="text-center mt-6 text-xs text-slate-400"
                 >
-                    Admin default: <span className="font-mono text-slate-500">admin@hisense.com</span>
+                    {t('adminDefault')} <span className="font-mono text-slate-500">admin@hisense.com</span>
                 </motion.p>
             </div>
         </div>

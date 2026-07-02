@@ -81,7 +81,7 @@ export default function Footer() {
 
                     {/* Social */}
                     <div>
-                        <h3 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-5">Follow Us</h3>
+                        <h3 className="text-xs font-black text-slate-500 uppercase tracking-widest mb-5">{t('followUs')}</h3>
                         <a
                             href={FB_URL}
                             target="_blank"
@@ -89,10 +89,10 @@ export default function Footer() {
                             className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#1877F2] text-white text-sm font-bold hover:bg-[#166fe5] hover:shadow-lg hover:-translate-y-0.5 transition-all shadow-md"
                         >
                             <FacebookIcon className="w-4 h-4" />
-                            Visit our Facebook page
+                            {t('visitFacebook')}
                         </a>
                         <p className="text-xs text-slate-400 mt-3 leading-relaxed">
-                            Stay updated with our latest<br />offers and new arrivals.
+                            {t('footerSocialDesc')}
                         </p>
                     </div>
                 </div>

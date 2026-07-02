@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -9,6 +10,7 @@ import { User, Mail, Phone, Lock, ArrowRight, AlertCircle, CheckCircle2, Laptop 
 
 export default function RegisterPage() {
     const { register, user, loading } = useAuth();
+    const { language, t } = useLanguage();
     const router = useRouter();
 
     const [username,        setUsername]        = useState('');
@@ -74,17 +76,17 @@ export default function RegisterPage() {
                     <div className="w-20 h-20 rounded-full bg-green-50 border border-green-200 flex items-center justify-center mx-auto mb-6">
                         <CheckCircle2 className="w-10 h-10 text-green-500" />
                     </div>
-                    <h2 className="text-2xl font-black text-slate-800 mb-2">Account Created!</h2>
-                    <p className="text-slate-400 text-sm">Redirecting you to login...</p>
+                    <h2 className="text-2xl font-black text-slate-800 mb-2">{language === 'ar' ? 'تم إنشاء الحساب!' : 'Account Created!'}</h2>
+                    <p className="text-slate-400 text-sm">{language === 'ar' ? 'جاري تحويلك لصفحة تسجيل الدخول...' : 'Redirecting you to login...'}</p>
                 </motion.div>
             </div>
         );
     }
 
     const fields = [
-        { id: 'username', label: 'Full Name', icon: User,  type: 'text',     value: username,        set: setUsername,        placeholder: 'Your name' },
+        { id: 'username', label: t('fullName'), icon: User,  type: 'text',     value: username,        set: setUsername,        placeholder: t('fullNamePlaceholder') },
         { id: 'email',    label: 'Email',     icon: Mail,  type: 'email',    value: email,           set: setEmail,           placeholder: 'your@email.com' },
-        { id: 'phone',    label: 'Phone',     icon: Phone, type: 'tel',      value: phone,           set: setPhone,           placeholder: '01xxxxxxxxx' },
+        { id: 'phone',    label: t('phoneField'),     icon: Phone, type: 'tel',      value: phone,           set: setPhone,           placeholder: '01xxxxxxxxx' },
         { id: 'password', label: 'Password',  icon: Lock,  type: 'password', value: password,        set: setPassword,        placeholder: 'Min. 6 characters' },
         { id: 'confirmPassword', label: 'Confirm Password', icon: Lock, type: 'password', value: confirmPassword, set: setConfirmPassword, placeholder: 'Repeat password' },
     ];
@@ -122,8 +124,8 @@ export default function RegisterPage() {
                     className="bg-white rounded-3xl border border-blue-100 shadow-[0_8px_48px_rgba(37,99,235,0.12)] p-8"
                 >
                     <div className="mb-8">
-                        <h1 className="text-3xl font-black text-slate-800 mb-2">Create account</h1>
-                        <p className="text-slate-400 text-sm">Join Hi-sense to browse our catalog</p>
+                        <h1 className="text-3xl font-black text-slate-800 mb-2">{t('createAccount')}</h1>
+                        <p className="text-slate-400 text-sm">{t('joinHisense')}</p>
                     </div>
 
                     {generalError && (
@@ -169,14 +171,14 @@ export default function RegisterPage() {
                             {submitting ? (
                                 <span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
                             ) : (
-                                <>Create Account <ArrowRight className="w-4 h-4" /></>
+                                <>{t('register')} <ArrowRight className="w-4 h-4" /></>
                             )}
                         </button>
 
                         <p className="text-center text-sm text-slate-400 pt-1">
-                            Already have an account?{' '}
+                            {t('alreadyHaveAccount')}{' '}
                             <Link href="/login" className="text-blue-600 font-bold hover:underline">
-                                Sign in
+                                {t('signIn')}
                             </Link>
                         </p>
                     </form>

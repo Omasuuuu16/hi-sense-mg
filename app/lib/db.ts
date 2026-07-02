@@ -156,6 +156,10 @@ export async function initializeDB() {
         console.log("Database initialization complete.");
     } catch (error) {
         console.error("Database initialization failed:", error);
+        // Reset so the next request retries with a fresh pool
+        try { await globalForDb.pool?.end(); } catch { /* ignore */ }
+        globalForDb.pool = undefined;
+        globalForDb.initialized = false;
         throw error;
     }
 }

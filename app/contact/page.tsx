@@ -19,7 +19,7 @@ export default function ContactPage() {
                     {t('contact')}
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                    We are here to help you find the best laptop or PC component for your needs.
+                    {t('contactSubtitle')}
                 </p>
             </motion.div>
 
@@ -29,21 +29,21 @@ export default function ContactPage() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="glass dark:glass-dark p-8 rounded-3xl"
+                    className="bg-white border border-gray-200 shadow-lg p-8 rounded-3xl"
                 >
                     <div className="space-y-6">
                         {/* General Manager */}
-                        <div className="glass dark:glass-dark p-6 rounded-2xl border-l-4 border-purple-500">
+                        <div className="bg-white border border-gray-200 shadow-sm p-6 rounded-2xl border-l-4 border-purple-500">
                             <div className="flex items-start gap-4 mb-4">
                                 <div className="p-3 rounded-full bg-purple-500/10 text-purple-500">
                                     <Mail className="w-6 h-6" />
                                 </div>
                                 <div className="flex-grow">
-                                    <h3 className="text-lg font-bold mb-1">General Manager</h3>
-                                    <p className="text-gray-600 dark:text-gray-300 text-lg font-semibold mb-2">
-                                        Mohamed Galal
+                                    <h3 className="text-lg font-bold mb-1">{t('generalManager')}</h3>
+                                    <p className="text-gray-800 text-lg font-semibold mb-2">
+                                        {t('mohamedGalal')}
                                     </p>
-                                    <a href="tel:+201005862727" className="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors text-base block mb-2" dir="ltr">
+                                    <a href="tel:+201005862727" className="text-gray-700 hover:text-primary transition-colors text-base block mb-2" dir="ltr">
                                         📞 +20 100 586 2727
                                     </a>
                                 </div>
@@ -55,19 +55,19 @@ export default function ContactPage() {
                                 className="w-full px-4 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold text-center transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center gap-2"
                             >
                                 <MessageCircle className="w-5 h-5" />
-                                WhatsApp Mohamed Galal
+                                {t('whatsappManager')}
                             </a>
                         </div>
 
                         {/* Ahmed Phone 1 */}
-                        <div className="glass dark:glass-dark p-6 rounded-2xl">
+                        <div className="bg-white border border-gray-200 shadow-sm p-6 rounded-2xl">
                             <div className="flex items-start gap-4">
                                 <div className="p-3 rounded-full bg-primary/10 text-primary">
                                     <Phone className="w-6 h-6" />
                                 </div>
                                 <div className="flex-grow">
-                                    <h3 className="text-lg font-bold mb-1">Ahmed - Phone 1</h3>
-                                    <a href="tel:+201114576255" className="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors text-base" dir="ltr">
+                                    <h3 className="text-lg font-bold mb-1">{t('phone1')}</h3>
+                                    <a href="tel:+201114576255" className="text-gray-700 hover:text-primary transition-colors text-base" dir="ltr">
                                         📞 +20 11 14576255
                                     </a>
                                 </div>
@@ -75,14 +75,14 @@ export default function ContactPage() {
                         </div>
 
                         {/* Ahmed Phone 2 */}
-                        <div className="glass dark:glass-dark p-6 rounded-2xl">
+                        <div className="bg-white border border-gray-200 shadow-sm p-6 rounded-2xl">
                             <div className="flex items-start gap-4 mb-4">
                                 <div className="p-3 rounded-full bg-primary/10 text-primary">
                                     <Phone className="w-6 h-6" />
                                 </div>
                                 <div className="flex-grow">
-                                    <h3 className="text-lg font-bold mb-1">Ahmed - Phone 2</h3>
-                                    <a href="tel:+201224576255" className="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors text-base" dir="ltr">
+                                    <h3 className="text-lg font-bold mb-1">{t('phone2')}</h3>
+                                    <a href="tel:+201224576255" className="text-gray-700 hover:text-primary transition-colors text-base" dir="ltr">
                                         📞 +20 12 24576255
                                     </a>
                                 </div>
@@ -94,19 +94,19 @@ export default function ContactPage() {
                                 className="w-full px-4 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold text-center transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center gap-2"
                             >
                                 <MessageCircle className="w-5 h-5" />
-                                WhatsApp Ahmed
+                                {t('whatsappAhmed')}
                             </a>
                         </div>
 
                         {/* Karem */}
-                        <div className="glass dark:glass-dark p-6 rounded-2xl">
+                        <div className="bg-white border border-gray-200 shadow-sm p-6 rounded-2xl">
                             <div className="flex items-start gap-4 mb-4">
                                 <div className="p-3 rounded-full bg-primary/10 text-primary">
                                     <Phone className="w-6 h-6" />
                                 </div>
                                 <div className="flex-grow">
-                                    <h3 className="text-lg font-bold mb-1">Karem</h3>
-                                    <a href="tel:+201033535638" className="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors text-base" dir="ltr">
+                                    <h3 className="text-lg font-bold mb-1">{t('karem')}</h3>
+                                    <a href="tel:+201033535638" className="text-gray-700 hover:text-primary transition-colors text-base" dir="ltr">
                                         📞 +20 10 33535638
                                     </a>
                                 </div>
@@ -118,19 +118,19 @@ export default function ContactPage() {
                                 className="w-full px-4 py-3 bg-green-500 hover:bg-green-600 text-white rounded-full font-bold text-center transition-all shadow-lg hover:shadow-green-500/30 flex items-center justify-center gap-2"
                             >
                                 <MessageCircle className="w-5 h-5" />
-                                WhatsApp Karem
+                                {t('whatsappKarem')}
                             </a>
                         </div>
 
                         {/* Mall Phone */}
-                        <div className="glass dark:glass-dark p-6 rounded-2xl">
+                        <div className="bg-white border border-gray-200 shadow-sm p-6 rounded-2xl">
                             <div className="flex items-start gap-4">
                                 <div className="p-3 rounded-full bg-primary/10 text-primary">
                                     <Phone className="w-6 h-6" />
                                 </div>
                                 <div className="flex-grow">
-                                    <h3 className="text-lg font-bold mb-1">Mall Phone</h3>
-                                    <a href="tel:0222571760" className="text-gray-600 dark:text-gray-300 hover:text-primary transition-colors text-base" dir="ltr">
+                                    <h3 className="text-lg font-bold mb-1">{t('mallPhone')}</h3>
+                                    <a href="tel:0222571760" className="text-gray-700 hover:text-primary transition-colors text-base" dir="ltr">
                                         📞 0222571760
                                     </a>
                                 </div>
@@ -138,15 +138,15 @@ export default function ContactPage() {
                         </div>
 
                         {/* Location */}
-                        <div className="glass dark:glass-dark p-6 rounded-2xl">
+                        <div className="bg-white border border-gray-200 shadow-sm p-6 rounded-2xl">
                             <div className="flex items-start gap-4">
                                 <div className="p-3 rounded-full bg-blue-500/10 text-blue-500">
                                     <MapPin className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold mb-1">Location</h3>
-                                    <p className="text-gray-600 dark:text-gray-300">
-                                        50 El-Khalifa El-Maamoun, Manshîyet el Bakri, Heliopolis, Cairo Governorate 4460043
+                                    <h3 className="text-lg font-bold mb-1">{t('location')}</h3>
+                                    <p className="text-gray-700">
+                                        {t('address')}
                                     </p>
                                 </div>
                             </div>

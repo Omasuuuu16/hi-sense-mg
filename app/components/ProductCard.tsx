@@ -70,20 +70,20 @@ export default function ProductCard({ product, onDeleteClick, onEditClick }: Pro
                         <button
                             onClick={e => { e.preventDefault(); e.stopPropagation(); onEditClick(product); }}
                             className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-blue-600 text-white text-xs font-bold shadow-md hover:bg-blue-700 active:scale-95 transition-all"
-                            title="Edit"
+                            title={t('edit')}
                         >
                             <Pencil className="w-3 h-3" />
-                            Edit
+                            {t('edit')}
                         </button>
                     )}
                     {onDeleteClick && (
                         <button
                             onClick={e => { e.preventDefault(); e.stopPropagation(); onDeleteClick(product); }}
                             className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-red-500 text-white text-xs font-bold shadow-md hover:bg-red-600 active:scale-95 transition-all"
-                            title="Delete"
+                            title={t('delete')}
                         >
                             <Trash2 className="w-3 h-3" />
-                            Del
+                            {t('delete')}
                         </button>
                     )}
                 </div>
@@ -115,7 +115,7 @@ export default function ProductCard({ product, onDeleteClick, onEditClick }: Pro
                 {/* Section tag */}
                 {product.section && (
                     <span className="text-[10px] font-bold text-blue-500 uppercase tracking-wider mb-1.5">
-                        {product.section}
+                        {t(product.section.toLowerCase())}
                     </span>
                 )}
 
@@ -130,10 +130,10 @@ export default function ProductCard({ product, onDeleteClick, onEditClick }: Pro
                 {/* Price + CTA */}
                 <div className="flex items-center justify-between pt-3 border-t border-slate-100 mt-auto">
                     <div>
-                        <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide leading-none mb-1">Price</p>
+                        <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wide leading-none mb-1">{t('price')}</p>
                         <p className="text-base font-black text-blue-600 leading-none">
                             {product.price.toLocaleString()}
-                            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 ml-1">EGP</span>
+                            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 ml-1">{t('egp')}</span>
                         </p>
                     </div>
 
@@ -141,7 +141,7 @@ export default function ProductCard({ product, onDeleteClick, onEditClick }: Pro
                         href={`/product/${product.id}`}
                         className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition-colors active:scale-95 shadow-sm"
                     >
-                        Details
+                        {t('viewDetails')}
                         {isRTL
                             ? <ArrowRight className="w-3.5 h-3.5 rotate-180" />
                             : <ArrowRight className="w-3.5 h-3.5" />

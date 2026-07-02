@@ -108,6 +108,44 @@ const translations = {
         priceLabel: "Price (EGP) *",
         saveChanges: "Save Changes",
         saving: "Saving...",
+
+        // Auth UI & Extras
+        admin: "Admin",
+        login: "Login",
+        register: "Register",
+        logout: "Logout",
+        hi: "Hi",
+        adminPanel: "Admin Panel",
+
+        // Footer & Social
+        followUs: "Follow Us",
+        footerSocialDesc: "Stay updated with our latest offers and new arrivals.",
+        visitFacebook: "Visit our Facebook page",
+
+        // Contact Page Extra
+        mohamedGalal: "Mohamed Galal",
+        address: "50 El-Khalifa El-Maamoun, Manshîyet el Bakri, Heliopolis, Cairo Governorate 4460043",
+
+        // ProductCard & Grids Extra
+        edit: "Edit",
+        actionCannotBeUndone: "This action cannot be undone.",
+
+        // Login & Register Pages
+        welcomeBack: "Welcome back",
+        signInDesc: "Sign in to your Hi-sense account",
+        dontHaveAccount: "Don't have an account?",
+        createOne: "Create one",
+        adminDefault: "Admin default:",
+        createAccount: "Create account",
+        joinHisense: "Join Hi-sense to browse our catalog",
+        fullName: "Full Name",
+        phoneField: "Phone",
+        confirmPassword: "Confirm Password",
+        fullNamePlaceholder: "Your name",
+        passwordPlaceholder: "Min. 6 characters",
+        confirmPasswordPlaceholder: "Repeat password",
+        alreadyHaveAccount: "Already have an account?",
+        signIn: "Sign in",
     },
     ar: {
         home: "الرئيسية",
@@ -121,14 +159,14 @@ const translations = {
         specifications: "المواصفات",
         relatedProducts: "منتجات ذات صلة",
         contactCompany: "تواصل مع الشركة",
-        copyright: "© 2026 هاي سينس. جميع الحقوق محفوظة.",
+        copyright: "© 2026 Hi-sense. جميع الحقوق محفوظة.",
         categories: "التصنيفات",
         all: "الكل",
         brand: "الماركة",
 
         // Home Page
         heroBadge: "متجر اللابتوبات وأجهزة الكمبيوتر المستعملة الأول في مصر",
-        heroTitle: "هاي سينس",
+        heroTitle: "Hi-sense",
         heroDesc: "أجهزة لابتوب وقطع كمبيوتر مستعملة وممتازة بأسعار لا تقبل المنافسة. جودة مضمونة، وتحديثات يومية.",
         browseLaptops: "تصفح اللابتوبات",
         pcParts: "قطع الكمبيوتر",
@@ -142,7 +180,7 @@ const translations = {
         laptopBrandList: "إتش بي، ديل، لينوفو، إيسر، أسوس والمزيد",
         pcPartList: "رامات، هاردات، شاشات والمزيد",
         shopNow: "تسوق الآن",
-        whyHisense: "لماذا هاي سينس",
+        whyHisense: "لماذا Hi-sense",
         whyChooseUs: "لماذا تختارنا؟",
         whyChooseUsDesc: "نحن ملتزمون بتقديم أفضل تجربة لعملائنا في كل مرة.",
         featuresQualityTitle: "جودة مضمونة ومفحوصة",
@@ -205,6 +243,44 @@ const translations = {
         priceLabel: "السعر (جنيه مصري) *",
         saveChanges: "حفظ التغييرات",
         saving: "جاري الحفظ...",
+
+        // Auth UI & Extras
+        admin: "لوحة التحكم",
+        login: "تسجيل الدخول",
+        register: "إنشاء حساب",
+        logout: "تسجيل الخروج",
+        hi: "مرحباً",
+        adminPanel: "لوحة التحكم",
+
+        // Footer & Social
+        followUs: "تابعنا",
+        footerSocialDesc: "تابعنا لمعرفة أحدث العروض والأجهزة المتاحة يومياً.",
+        visitFacebook: "صفحتنا على فيسبوك",
+
+        // Contact Page Extra
+        mohamedGalal: "محمد جلال",
+        address: "٥٠ شارع الخليفة المأمون، منشية البكري، مصر الجديدة، القاهرة",
+
+        // ProductCard & Grids Extra
+        edit: "تعديل",
+        actionCannotBeUndone: "لا يمكن التراجع عن هذا الإجراء.",
+
+        // Login & Register Pages
+        welcomeBack: "مرحباً بعودتك",
+        signInDesc: "سجل دخولك لحساب Hi-sense",
+        dontHaveAccount: "ليس لديك حساب؟",
+        createOne: "أنشئ حساباً جديداً",
+        adminDefault: "الحساب التجريبي للمشرف:",
+        createAccount: "إنشاء حساب جديد",
+        joinHisense: "انضم إلى Hi-sense لتصفح منتجاتنا",
+        fullName: "الاسم الكامل",
+        phoneField: "رقم الهاتف",
+        confirmPassword: "تأكيد كلمة المرور",
+        fullNamePlaceholder: "الاسم بالكامل",
+        passwordPlaceholder: "على الأقل ٦ أحرف",
+        confirmPasswordPlaceholder: "أعد كتابة كلمة المرور",
+        alreadyHaveAccount: "هل لديك حساب بالفعل؟",
+        signIn: "تسجيل الدخول",
     }
 };
 

@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X, LogOut, Shield, Laptop, Cpu, Home, Phone } from 'lucide-react';
+import { Menu, X, LogOut, Shield, Laptop, Cpu, Home, Phone, Globe } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const FB_URL = 'https://www.facebook.com/profile.php?id=61565876215208';
@@ -17,14 +18,15 @@ const FacebookIcon = ({ className }: { className?: string }) => (
 );
 
 const navLinks = [
-    { href: '/', label: 'Home', icon: Home },
-    { href: '/laptops', label: 'Laptops', icon: Laptop },
-    { href: '/pcs', label: 'PCs & Parts', icon: Cpu },
-    { href: '/contact', label: 'Contact Us', icon: Phone },
+    { href: '/', label: 'home', icon: Home },
+    { href: '/laptops', label: 'laptops', icon: Laptop },
+    { href: '/pcs', label: 'pcs', icon: Cpu },
+    { href: '/contact', label: 'contact', icon: Phone },
 ];
 
 export default function Navbar() {
     const { user, isAdmin, logout } = useAuth();
+    const { language, setLanguage, t } = useLanguage();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const pathname = usePathname();
@@ -73,7 +75,7 @@ export default function Navbar() {
                                         }`}
                                 >
                                     <Icon className="w-4 h-4" />
-                                    {label}
+                                    {t(label)}
                                     {active && (
                                         <motion.div
                                             layoutId="nav-indicator"
@@ -93,7 +95,7 @@ export default function Navbar() {
                                     }`}
                             >
                                 <Shield className="w-4 h-4" />
-                                Admin
+                                {t('admin')}
                             </Link>
                         )}
                     </div>
@@ -101,27 +103,38 @@ export default function Navbar() {
                     {/* Right Actions */}
                     <div className="flex items-center gap-3">
 
+                        {/* Language Toggle — desktop */}
+                        <button
+                            onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')}
+                            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50 transition-all"
+                            title={language === 'en' ? 'Switch to Arabic' : 'التغيير إلى الإنجليزية'}
+                        >
+                            <Globe className="w-4 h-4 text-slate-500 hover:text-blue-600" />
+                            <span>{language === 'en' ? 'العربية' : 'English'}</span>
+                        </button>
+
                         {/* Facebook — desktop */}
                         <a
                             href={FB_URL}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold text-[#1877F2] hover:bg-blue-50 transition-all"
-                            title="Visit our Facebook page"
+                            title={t('visitFacebook')}
                         >
                             <FacebookIcon className="w-4 h-4" />
-                            Facebook
+                            {t('facebook')}
                         </a>
+                        
                         {/* Auth UI */}
                         {user ? (
                             <div className="hidden md:flex items-center gap-4">
                                 <span className="text-sm text-slate-600 font-semibold">
-                                    Hi, <span className="text-blue-600 font-bold">{user.username}</span>
+                                    {t('hi')}, <span className="text-blue-600 font-bold">{user.username}</span>
                                 </span>
                                 <button
                                     onClick={logout}
                                     className="p-2 rounded-xl text-slate-400 hover:text-red-500 hover:bg-red-50 transition-all"
-                                    title="Logout"
+                                    title={t('logout')}
                                 >
                                     <LogOut className="w-5 h-5" />
                                 </button>
@@ -129,10 +142,10 @@ export default function Navbar() {
                         ) : (
                             <div className="hidden md:flex items-center gap-2">
                                 <Link href="/login" className="px-4 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-blue-600 hover:bg-blue-50/70 transition-all">
-                                    Login
+                                    {t('login')}
                                 </Link>
                                 <Link href="/register" className="px-5 py-2 rounded-xl text-sm font-bold bg-gradient-to-r from-blue-600 to-sky-500 text-white shadow-md hover:-translate-y-0.5 transition-all">
-                                    Register
+                                    {t('register')}
                                 </Link>
                             </div>
                         )}
@@ -170,9 +183,21 @@ export default function Navbar() {
                                         }`}
                                 >
                                     <Icon className="w-4 h-4" />
-                                    {label}
+                                    {t(label)}
                                 </Link>
                             ))}
+
+                            {/* Language — mobile */}
+                            <button
+                                onClick={() => {
+                                    setLanguage(language === 'en' ? 'ar' : 'en');
+                                    setIsMenuOpen(false);
+                                }}
+                                className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-slate-600 hover:bg-blue-50 hover:text-blue-600 transition-colors text-left rtl:text-right"
+                            >
+                                <Globe className="w-4 h-4 text-slate-500" />
+                                <span>{language === 'en' ? 'العربية' : 'English'}</span>
+                            </button>
 
                             {/* Facebook — mobile */}
                             <a
@@ -183,7 +208,7 @@ export default function Navbar() {
                                 className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-[#1877F2] hover:bg-blue-50 transition-colors"
                             >
                                 <FacebookIcon className="w-4 h-4" />
-                                Visit our Facebook page
+                                {t('visitFacebook')}
                             </a>
 
                             {isAdmin && (
@@ -191,7 +216,7 @@ export default function Navbar() {
                                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-blue-600 hover:bg-blue-50"
                                 >
                                     <Shield className="w-4 h-4" />
-                                    Admin Panel
+                                    {t('adminPanel')}
                                 </Link>
                             )}
 
@@ -209,10 +234,10 @@ export default function Navbar() {
                                         </div>
                                         <button
                                             onClick={() => { setIsMenuOpen(false); logout(); }}
-                                            className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors"
+                                            className="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors text-left rtl:text-right"
                                         >
                                             <LogOut className="w-4 h-4" />
-                                            Logout
+                                            {t('logout')}
                                         </button>
                                     </div>
                                 ) : (
@@ -220,12 +245,12 @@ export default function Navbar() {
                                         <Link href="/login" onClick={() => setIsMenuOpen(false)}
                                             className="flex-1 text-center py-2.5 rounded-xl text-sm font-semibold text-blue-600 border border-blue-200 hover:bg-blue-50 transition-all"
                                         >
-                                            Login
+                                            {t('login')}
                                         </Link>
                                         <Link href="/register" onClick={() => setIsMenuOpen(false)}
                                             className="flex-1 text-center py-2.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-600 to-sky-500 text-white shadow-sm hover:opacity-90 transition-all"
                                         >
-                                            Register
+                                            {t('register')}
                                         </Link>
                                     </div>
                                 )}
