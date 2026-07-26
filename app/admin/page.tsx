@@ -347,8 +347,8 @@ export default function AdminPage() {
                                                 <p className="text-xs font-bold text-emerald-700 flex items-center gap-1.5 mb-1.5">
                                                     <Plus className="w-3.5 h-3.5" /> New ({resultSummary.comparison.new.length})
                                                 </p>
-                                                {resultSummary.comparison.new.map((m: string) => (
-                                                    <p key={m} className="text-xs text-emerald-600 truncate">• {m}</p>
+                                                {resultSummary.comparison.new.map((m: string, i: number) => (
+                                                    <p key={i} className="text-xs text-emerald-600 truncate">• {m}</p>
                                                 ))}
                                             </div>
                                         )}
@@ -357,8 +357,8 @@ export default function AdminPage() {
                                                 <p className="text-xs font-bold text-red-700 flex items-center gap-1.5 mb-1.5">
                                                     <Minus className="w-3.5 h-3.5" /> Deleted ({resultSummary.comparison.deleted.length})
                                                 </p>
-                                                {resultSummary.comparison.deleted.map((m: string) => (
-                                                    <p key={m} className="text-xs text-red-600 truncate">• {m}</p>
+                                                {resultSummary.comparison.deleted.map((m: string, i: number) => (
+                                                    <p key={i} className="text-xs text-red-600 truncate">• {m}</p>
                                                 ))}
                                             </div>
                                         )}

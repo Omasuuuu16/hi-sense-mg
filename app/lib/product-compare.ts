@@ -13,6 +13,13 @@ function normalizeModel(model: string): string {
     return model.trim().toLowerCase().replace(/\s+/g, ' ');
 }
 
+function productKey(p: StoreProduct): string {
+    const model = normalizeModel(p.model);
+    const specs = (p.specs || '').trim().toLowerCase().replace(/\s+/g, ' ');
+    // Use specs as secondary key so same-model but different-spec products are treated separately
+    return specs ? `${model}|||${specs}` : model;
+}
+
 /** Compare existing products (in categories) with incoming products by model name. */
 export function compareProducts(
     existing: StoreProduct[],
@@ -22,9 +29,9 @@ export function compareProducts(
     const catSet = new Set(categories.map(c => c.toLowerCase()));
 
     const oldInCategory = existing.filter(p => catSet.has(p.category.toLowerCase()));
-    const oldByModel = new Map(oldInCategory.map(p => [normalizeModel(p.model), p]));
+    const oldByModel = new Map(oldInCategory.map(p => [productKey(p), p]));
 
-    const incomingByModel = new Map(incoming.map(p => [normalizeModel(p.model), p]));
+    const incomingByModel = new Map(incoming.map(p => [productKey(p), p]));
 
     const newProducts: StoreProduct[] = [];
     const unchangedProducts: StoreProduct[] = [];
