@@ -34,6 +34,8 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                 /* ── 1. Folder / ZIP setup ──────────────────────────────── */
                 let dirHandle: any = null;
                 let targetFolderHandle: any = null;
+                let laptopFolderHandle: any = null;
+                let pcFolderHandle: any = null;
                 let useZip = true;
 
                 if ('showDirectoryPicker' in window) {
@@ -64,6 +66,11 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                                 }
                             }
                         }
+
+                        // Create Laptop and PC subfolders inside the date folder
+                        laptopFolderHandle = await targetFolderHandle.getDirectoryHandle('Laptop', { create: true });
+                        pcFolderHandle     = await targetFolderHandle.getDirectoryHandle('PC',     { create: true });
+
                     } catch (e: any) {
                         if (e.name === 'AbortError') {
                             throw new Error('Folder selection was cancelled. Generation aborted.');
@@ -99,16 +106,28 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                 /* ── 4. ZIP helper ──────────────────────────────────────── */
                 const zip = new JSZip();
 
-                const saveFile = async (filename: string, dataUrl: string | null, textData: string | null) => {
+                const saveFile = async (
+                    filename: string,
+                    dataUrl: string | null,
+                    textData: string | null,
+                    subfolder?: 'Laptop' | 'PC'
+                ) => {
                     if (useZip) {
+                        // Use folder prefix inside the ZIP
+                        const zipPath = subfolder ? `${subfolder}/${filename}` : filename;
                         if (dataUrl) {
-                            zip.file(filename, dataUrl.replace(/^data:image\/png;base64,/, ''), { base64: true });
+                            zip.file(zipPath, dataUrl.replace(/^data:image\/png;base64,/, ''), { base64: true });
                         } else if (textData) {
-                            zip.file(filename, textData);
+                            zip.file(zipPath, textData);
                         }
                     } else if (targetFolderHandle) {
-                        const fileHandle = await targetFolderHandle.getFileHandle(filename, { create: true });
-                        const writable  = await fileHandle.createWritable();
+                        // Route to the correct subfolder handle
+                        const folderHandle =
+                            subfolder === 'Laptop' ? laptopFolderHandle :
+                            subfolder === 'PC'     ? pcFolderHandle     :
+                            targetFolderHandle;
+                        const fileHandle = await folderHandle.getFileHandle(filename, { create: true });
+                        const writable   = await fileHandle.createWritable();
                         if (dataUrl) {
                             const blob = await (await fetch(dataUrl)).blob();
                             await writable.write(blob);
@@ -151,7 +170,7 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                 /* ── 6. Render helper ───────────────────────────────────── */
                 let fontsLoaded = false;
 
-                const generateNode = async (htmlStr: string, filename: string) => {
+                const generateNode = async (htmlStr: string, filename: string, subfolder?: 'Laptop' | 'PC') => {
                     const { headHtml, bodyHtml } = splitTemplate(htmlStr);
 
                     // Update head (styles / font imports) in-place
@@ -178,7 +197,7 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                         style: { margin: '0', padding: '0' },
                     });
 
-                    await saveFile(filename, dataUrl, null);
+                    await saveFile(filename, dataUrl, null, subfolder);
                 };
 
                 /* ── 7. Generate laptop images ──────────────────────────── */
@@ -208,7 +227,7 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                             .replace(/\{\{PRICE\}\}/g,        product.price.toLocaleString('en-US'))
                             .replace(/\{\{LAPTOP_IMAGE\}\}/g, laptopImg);
 
-                        await generateNode(html, `laptop_${modelToSlug(product.model)}.png`);
+                        await generateNode(html, `laptop_${modelToSlug(product.model)}.png`, 'Laptop');
                     } catch (itemErr) {
                         console.warn(`Skipped laptop "${product.model}":`, itemErr);
                         skipped++;
@@ -233,7 +252,7 @@ export const ClientPostGenerator = forwardRef<ClientPostGeneratorRef, { onProgre
                             .replace(/\{\{PRICE\}\}/g,    product.price.toLocaleString('en-US'))
                             .replace(/\{\{PC_IMAGE\}\}/g, pcImg);
 
-                        await generateNode(html, `pc_${modelToSlug(product.model)}.png`);
+                        await generateNode(html, `pc_${modelToSlug(product.model)}.png`, 'PC');
                     } catch (itemErr) {
                         console.warn(`Skipped PC part "${product.model}":`, itemErr);
                         skipped++;
