@@ -95,32 +95,20 @@ export default function AdminPage() {
         setGenerateResult(null);
         setProgressMsg('Starting generation...');
         try {
-            const body: { categories?: string[] } = {};
-            if (resultSummary && resultSummary.categoriesReplaced) {
-                body.categories = resultSummary.categoriesReplaced;
-            }
-            
-            // Fetch products
+            // Fetch ALL products — generate images for everything in the database
             const res = await fetch('/api/products');
             if (!res.ok) throw new Error('Failed to fetch products');
             const allProducts = await res.json();
-            
-            // Filter products
-            let textProducts = allProducts;
-            if (body.categories && body.categories.length > 0) {
-                const lowerCats = new Set(body.categories.map(c => c.toLowerCase()));
-                textProducts = allProducts.filter((p: any) => lowerCats.has(p.category.toLowerCase()));
-            }
 
-            // Build post text
-            const postText = generateCatalogPostText(textProducts);
+            // Build post text using all products (or filtered by last upload's categories if desired)
+            const postText = generateCatalogPostText(allProducts);
 
-            // Execute client generator
-            await generatorRef.current?.generatePost(allProducts, body.categories, postText);
+            // Always generate images for ALL products, no category filter
+            await generatorRef.current?.generatePost(allProducts, undefined, postText);
 
             setGenerateResult({
-                laptopsGenerated: textProducts.filter((p: any) => p.category.toLowerCase() === 'laptop').length,
-                pcsGenerated: textProducts.filter((p: any) => p.category.toLowerCase() === 'pc').length,
+                laptopsGenerated: allProducts.filter((p: any) => p.category.toLowerCase() === 'laptop').length,
+                pcsGenerated: allProducts.filter((p: any) => p.category.toLowerCase() === 'pc').length,
                 folderPath: 'Saved to your selected folder (or ZIP)',
                 errors: []
             });
