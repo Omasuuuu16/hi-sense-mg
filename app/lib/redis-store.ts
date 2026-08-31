@@ -60,21 +60,7 @@ async function ensureInitialized() {
     if (initialized) return;
     const client = await getRedis();
 
-    const users = await client.get(USERS_KEY);
-    if (!users) {
-        const adminHash = await bcrypt.hash('admin123', 10);
-        const defaultUsers: StoreUser[] = [{
-            id: 1,
-            username: 'Admin',
-            email: 'admin@hisense.com',
-            password: adminHash,
-            phone: '01000000000',
-            role: 'Admin',
-            created_at: new Date().toISOString(),
-        }];
-        await client.set(USERS_KEY, JSON.stringify(defaultUsers));
-        console.log('Redis: default admin seeded (admin@hisense.com / admin123).');
-    }
+    // Default admin seeding removed — manage admin accounts manually.
 
     const products = await client.get(PRODUCTS_KEY);
     if (!products) {

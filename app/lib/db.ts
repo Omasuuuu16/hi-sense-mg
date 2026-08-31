@@ -104,18 +104,7 @@ export async function initializeDB() {
             }
         }
 
-        // 4. Seed default admin if no users exist
-        const [users] = await pool.query('SELECT COUNT(*) as count FROM users');
-        const userCount = (users as any)[0]?.count || 0;
-
-        if (userCount === 0) {
-            const adminPasswordHash = await bcrypt.hash('admin123', 10);
-            await pool.query(
-                `INSERT INTO users (username, email, password, phone, role) VALUES (?, ?, ?, ?, ?)`,
-                ['Admin', 'admin@hisense.com', adminPasswordHash, '01000000000', 'Admin']
-            );
-            console.log("Default Admin user seeded (admin@hisense.com / admin123).");
-        }
+        // Default admin seeding removed — manage admin accounts manually.
 
         // 5. Seed default products if no products exist
         const [prods] = await pool.query('SELECT COUNT(*) as count FROM products');
